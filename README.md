@@ -1,5 +1,19 @@
 # Sentinel OS
 
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
+![Azure](https://img.shields.io/badge/Azure-Cloud-blue?style=for-the-badge&logo=microsoftazure)
+![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange?style=for-the-badge&logo=ubuntu)
+![AI](https://img.shields.io/badge/AI-Native-purple?style=for-the-badge)
+![Security](https://img.shields.io/badge/Cyber-Security-red?style=for-the-badge)
+![Cloud Native](https://img.shields.io/badge/Cloud-Native-Architecture-blue?style=for-the-badge&logo=kubernetes)
+![Status](https://img.shields.io/badge/Status-Active_Development-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Observability](https://img.shields.io/badge/Observability-Telemetry-black?style=for-the-badge)
+![Automation](https://img.shields.io/badge/Automation-Orchestration-darkgreen?style=for-the-badge)
+![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red?style=for-the-badge&logo=streamlit)
+![Docker](https://img.shields.io/badge/Docker-Containers-blue?style=for-the-badge&logo=docker)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blue?style=for-the-badge&logo=kubernetes)
+
 ## AI-Native Cyber Operations Platform
 
 Sentinel OS is an AI-driven security operations ecosystem focused on:
