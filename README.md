@@ -1,47 +1,219 @@
-**Sentinel OS** is an automated Offensive Security, Open Source Intelligence (OSINT), and Corporate Perimeter Auditing framework. Engineered to mitigate the global cybersecurity talent shortage, this framework acts as a force multiplier by centralizing industry-standard security tools under a generative AI orchestration engine.
+# Sentinel OS
+
+## AI-Native Cyber Operations Platform
+
+Sentinel OS is an AI-driven security operations ecosystem focused on:
+
+* Offensive Security
+* Compliance
+* Observability
+* Threat Intelligence
+* Automation
+* Cloud-Native Security
+* Autonomous Cyber Operations
+
+The project is being architected as a modular and scalable security platform designed to evolve into a next-generation cyber operations environment powered by artificial intelligence, orchestration and distributed analysis.
 
 ---
 
-## 🚀 Core Capabilities & Architecture
+# Vision
 
-The framework automates the entire external penetration testing lifecycle and threat intelligence gathering into an agile production pipeline divided into four critical layers:
+Sentinel OS aims to become a unified cyber operations ecosystem capable of:
 
-* **Human & Infrastructure OSINT:** Global footprint mapping and corporate asset leak detection through deep integration with technical intelligence (SpiderFoot) and social media intelligence (Sherlock SOCMINT).
-* **Dynamic Application Security Testing (DAST):** Active vulnerability scanning targeting over 6,700 dangerous file indexes, server misconfigurations, and database logical injection flaws (utilizing Nikto and SQLMap with advanced evasion engines).
-* **Active Authentication Auditing (Network Brute Forcing):** Real-time credential testing against critical communication protocols (SSH, FTP, Database ports, RDP) to eliminate default factory settings and weak password policies (Medusa).
-* **Cryptanalysis & Offline Password Cracking:** Post-exploitation module dedicated to auditing database cryptographic robustness (John the Ripper).
-* **AI-Powered Executive Reporting Engine:** A core engine built on Google's Gemini LLM SDK that consolidates raw, complex technical logs into clear, actionable tactical business reports. It features native, instant export to corporate formats (**PDF** and **DOCX**).
+* Automated offensive simulation
+* Intelligent vulnerability correlation
+* Infrastructure observability
+* Security orchestration
+* Autonomous workflows
+* AI-assisted security analysis
+* Cloud-native distributed operations
 
----
-
-## 🏢 Market Alignment & Commercial Value
-
-Sentinel OS was architected with a strong focus on market viability (Scalable MVP) and industrial defensive security, attracting strategic interest from industrial hubs and defense institutions:
-
-### 🏭 Industrial Sector (Enterprise & Supply Chain Security)
-Large industries and critical supply chains suffer daily from Ransomware threats and "Shadow IT" (forgotten rogue servers deployed by engineering teams). Sentinel OS solves this by operating as a lightweight, continuous compliance auditor, delivering rapid reporting that aligns with international cyber insurance requirements.
-
-### 🪖 Defense & Institutional Intelligence
-Due to its rapid internal threat screening (Username OSINT) and perimeter mapping without heavy third-party infrastructure dependencies, the Sentinel architecture fulfills the tactical mobility requirements demanded by intelligence and cyber warfare units.
+The long-term objective is to create an operational security platform capable of serving companies, analysts, researchers and enterprise environments through intelligent automation and modular cyber capabilities.
 
 ---
 
-## 🛠️ Engineering Stack
+# Core Principles
 
-The core architecture prioritizes stability, modularity, and low hardware footprint:
+## Modular Architecture
 
-* **Core Language:** Python 3 (Object-Oriented, Asynchronous, Multi-threaded)
-* **Graphical User Interface (GUI):** CustomTkinter (Modern Executive UX Design)
-* **Operational Environment:** Linux / Ubuntu (via WSL2 Integration)
-* **Embedded Engines:** Nmap, Nikto, SQLMap, Medusa, Sherlock, John the Ripper
-* **Generative AI SDK:** Google GenAI / Gemini API
+Sentinel OS is transitioning from a monolithic structure into a modular ecosystem where each security capability operates independently.
+
+## AI-Native Foundation
+
+Artificial intelligence is not treated as an external plugin, but as a core operational layer integrated into orchestration and decision-making.
+
+## Cloud-First Infrastructure
+
+The platform is designed to operate in cloud-native environments with scalability and distributed execution in mind.
+
+## Operational Security Focus
+
+Sentinel OS prioritizes:
+
+* observability
+* operational visibility
+* security automation
+* tactical execution
+* infrastructure awareness
 
 ---
 
-## ✉️ Contact & Commercial Partnerships
+# Current Architecture
 
-The source code and proprietary signatures of Sentinel OS are maintained under a closed-source regime to protect intellectual property. For Proof of Concept (PoC) scheduling, investment proposals, or institutional partnerships:
+```text
+frontend/
+└── streamlit/
+    └── app.py
 
-* **Lead Architect:** Reginaldo Soares de Vasconcelos Filho
-* **LinkedIn / Portfolio:** https://www.linkedin.com/in/reginaldo-soares-21298a272/ 
-* **Location:** Barra Mansa, Rio de Janeiro - Brazil
+backend/
+└── modules/
+    ├── nikto/
+    ├── spiderfoot/
+    ├── john/
+    ├── enum4linux/
+    ├── kubehunter/
+    └── dagda/
+
+core/
+├── events/
+├── orchestration/
+├── telemetry/
+└── ai/
+```
+
+---
+
+# Platform Objectives
+
+## Offensive Operations
+
+* Web assessment
+* SMB enumeration
+* Kubernetes analysis
+* Docker security analysis
+* OSINT intelligence gathering
+* Credential analysis
+
+## Observability
+
+* Infrastructure telemetry
+* Security event visibility
+* Execution tracing
+* Distributed monitoring
+
+## Automation
+
+* Workflow orchestration
+* Automated execution pipelines
+* Event-driven processing
+* Autonomous task execution
+
+## Compliance
+
+* Infrastructure inspection
+* Vulnerability visibility
+* Operational reporting
+* Security posture analysis
+
+---
+
+# Technology Stack
+
+* Python
+* Streamlit
+* Docker
+* Kubernetes
+* Azure Cloud
+* Linux
+* AI Integration
+* Event-Driven Architecture
+
+---
+
+# Current Development Stage
+
+Sentinel OS is currently focused on:
+
+* backend modularization
+* architecture restructuring
+* cloud-native preparation
+* operational stabilization
+* AI orchestration foundation
+
+---
+
+# Long-Term Roadmap
+
+## Phase 1 — Structural Foundation
+
+* Modular backend
+* Streamlit separation
+* Execution isolation
+* Virtual environment standardization
+
+## Phase 2 — Core Platform
+
+* Event Bus
+* Telemetry layer
+* Distributed workers
+* Central orchestration
+
+## Phase 3 — AI Layer
+
+* AI-assisted operations
+* Intelligent correlation
+* Autonomous analysis
+* Threat reasoning
+
+## Phase 4 — Cloud Ecosystem
+
+* Multi-user environment
+* Authentication
+* RBAC
+* Organization workspaces
+* SaaS architecture
+
+## Phase 5 — Enterprise Operations
+
+* Distributed execution
+* Cloud scaling
+* Multi-region infrastructure
+* Advanced observability
+* Security automation ecosystem
+
+---
+
+# Philosophy
+
+Sentinel OS is not intended to be just another security tool.
+
+The project is being designed as an operational ecosystem focused on intelligent cyber operations, scalable automation and modular security architecture.
+
+---
+
+# Status
+
+Active Development
+
+---
+
+# Author
+
+Reginaldo Soares de Vasconcelos Filho
+
+---
+
+# Future Goals
+
+* AI Security Operations
+* Autonomous SOC capabilities
+* Cloud-native orchestration
+* Security intelligence correlation
+* Enterprise-scale observability
+* Intelligent cyber automation
+
+---
+
+# Sentinel OS
+
+Building the future of intelligent cyber operations.
