@@ -1,50 +1,220 @@
-# Sentinel-OS-2.0
-# 🛡️ Sentinel OS — Intelligent Cyber Security Framework
+# Sentinel OS
 
-O **Sentinel OS** é um ecossistema automatizado de Segurança Ofensiva, Inteligência de Fontes Abertas (OSINT) e Auditoria de Perímetro Corporativo. Desenvolvido para preencher a escassez de mão de obra técnica no mercado de segurança da informação, o framework atua como um multiplicador de forças, centralizando ferramentas de padrão de indústria sob o comando de um motor de Inteligência Artificial.
+## Plataforma de Operações Cibernéticas Nativa em IA
 
----
+O Sentinel OS é um ecossistema de operações de segurança orientado por inteligência artificial, focado em:
 
-## 🚀 O que é e o que faz?
+* Segurança Ofensiva
+* Compliance
+* Observabilidade
+* Threat Intelligence
+* Automação
+* Segurança Cloud-Native
+* Operações Cibernéticas Autônomas
 
-O framework automatiza o ciclo completo de testes de intrusão externos e coleta de inteligência em uma esteira de produção ágil, dividida em quatro camadas críticas:
-
-* **Inteligência Humana e de Infraestrutura (OSINT):** Mapeamento global de pegadas digitais de alvos e vazamento de ativos corporativos através da integração com motores de inteligência técnica (SpiderFoot) e inteligência social (Sherlock SOCMINT).
-* **Auditoria de Aplicações Web (DAST):** Varredura ativa contra mais de 6.700 indexações de arquivos perigosos, configurações inseguras e vulnerabilidades de injeção lógica de dados em servidores (Nikto e SQLMap com motores de evasão).
-* **Análise Ativa de Autenticação (Brute Force de Rede):** Testes em tempo real contra serviços críticos de comunicação (SSH, FTP, Bancos de Dados) para mitigar políticas de senhas fracas ou credenciais padrões de fábrica (Medusa).
-* **Criptoanálise e Quebra de Hashes:** Módulo de pós-exploração offline para auditoria de robustez criptográfica de base de dados (John the Ripper).
-* **Motor de Relatórios Executivos (IA):** Um cérebro baseado no modelo Gemini LLM que consolida logs técnicos complexos em relatórios táticos comerciais, com exportação nativa e imediata para formatos corporativos (**PDF** e **DOCX**).
-
----
-
-## 🏢 Alinhamento de Mercado e Interesse Comercial
-
-O Sentinel OS foi projetado com foco em viabilidade de mercado (MVP escalável) e segurança defensiva industrial, atraindo o interesse estratégico de instituições de fomento e infraestruturas críticas:
-
-### 🏭 Setor Industrial (Conexão FIRJAN / Indústrias do Rio de Janeiro)
-Grandes indústrias e cadeias de suprimentos sofrem diariamente com ataques de *Ransomware* e *Shadow IT* (servidores esquecidos na rede por equipes de engenharia). O Sentinel OS resolve isso operando como um auditor de rotina leve e contínuo, entregando relatórios em conformidade com as exigências de seguro cibernético do mercado nacional.
-
-### 🪖 Defesa e Segurança Institucional
-Pela sua capacidade rápida de triagem de ameaças internas (Username OSINT) e mapeamento perimetral sem dependências de infraestruturas terceiras pesadas, o modelo de arquitetura do Sentinel atende aos requisitos de mobilidade operacional demandados por centros de inteligência e guerra cibernética.
+O projeto está sendo arquitetado como uma plataforma modular e escalável de segurança, desenvolvida para evoluir para um ambiente operacional de próxima geração impulsionado por inteligência artificial, orquestração e análise distribuída.
 
 ---
 
-## 🛠️ Stack Tecnológica de Engenharia
+# Visão
 
-O núcleo do projeto foi construído priorizando estabilidade, modularidade e baixo consumo de recursos de hardware:
+O Sentinel OS tem como objetivo se tornar um ecossistema unificado de operações cibernéticas capaz de realizar:
 
-* **Linguagem Core:** Python 3 (Orientação a Objetos Assíncrona e Multi-threading)
-* **Interface Gráfica (GUI):** CustomTkinter (Design Moderno com foco em UX Executivo)
-* **Ambiente Operacional:** Linux / Ubuntu (via WSL2 Integration)
-* **Motores Embarcados:** Nmap, Nikto, SQLMap, Medusa, Sherlock, John the Ripper
-* **Generative AI SDK:** Google GenAI / Gemini API
+* Simulação ofensiva automatizada
+* Correlação inteligente de vulnerabilidades
+* Observabilidade de infraestrutura
+* Orquestração de segurança
+* Fluxos autônomos
+* Análise assistida por IA
+* Operações distribuídas cloud-native
+
+O objetivo de longo prazo é criar uma plataforma operacional de segurança capaz de atender empresas, analistas, pesquisadores e ambientes corporativos através de automação inteligente e capacidades cibernéticas modulares.
 
 ---
 
-## ✉️ Contato & Parcerias Comerciais
+# Princípios Fundamentais
 
-O código-fonte e as assinaturas proprietárias do Sentinel OS são mantidos sob regime de desenvolvimento fechado para proteção de propriedade intelectual. Para agendamento de demonstrações técnicas (PoC), propostas de investimento ou parcerias institucionais:
+## Arquitetura Modular
 
-* **Desenvolvedor Principal:** Reginaldo Soares de Vasconcelos Filho 
-* **LinkedIn / Portfólio:** https://www.linkedin.com/in/reginaldo-soares-21298a272/  
-* **Localização:** Barra Mansa, Rio de Janeiro - Brasil
+O Sentinel OS está passando de uma estrutura monolítica para um ecossistema modular, onde cada capacidade de segurança opera de forma independente.
+
+## Base Nativa em IA
+
+A inteligência artificial não é tratada como um plugin externo, mas como uma camada operacional central integrada à orquestração e tomada de decisão.
+
+## Infraestrutura Cloud-First
+
+A plataforma é projetada para operar em ambientes cloud-native, com foco em escalabilidade e execução distribuída.
+
+## Foco em Segurança Operacional
+
+O Sentinel OS prioriza:
+
+* observabilidade
+* visibilidade operacional
+* automação de segurança
+* execução tática
+* consciência de infraestrutura
+
+---
+
+# Arquitetura Atual
+
+```text id="gfkk4w"
+frontend/
+└── streamlit/
+    └── app.py
+
+backend/
+└── modules/
+    ├── nikto/
+    ├── spiderfoot/
+    ├── john/
+    ├── enum4linux/
+    ├── kubehunter/
+    └── dagda/
+
+core/
+├── events/
+├── orchestration/
+├── telemetry/
+└── ai/
+```
+
+---
+
+# Objetivos da Plataforma
+
+## Operações Ofensivas
+
+* Análise web
+* Enumeração SMB
+* Análise Kubernetes
+* Segurança Docker
+* Coleta OSINT
+* Análise de credenciais
+
+## Observabilidade
+
+* Telemetria de infraestrutura
+* Visibilidade de eventos
+* Rastreamento de execução
+* Monitoramento distribuído
+
+## Automação
+
+* Orquestração de workflows
+* Pipelines automatizados
+* Processamento orientado a eventos
+* Execução autônoma
+
+## Compliance
+
+* Inspeção de infraestrutura
+* Visibilidade de vulnerabilidades
+* Relatórios operacionais
+* Análise de postura de segurança
+
+---
+
+# Stack Tecnológica
+
+* Python
+* Streamlit
+* Docker
+* Kubernetes
+* Azure Cloud
+* Linux
+* Integração com IA
+* Arquitetura Orientada a Eventos
+
+---
+
+# Estágio Atual de Desenvolvimento
+
+O Sentinel OS está atualmente focado em:
+
+* modularização do backend
+* reestruturação arquitetural
+* preparação cloud-native
+* estabilização operacional
+* fundação de orquestração por IA
+
+---
+
+# Roadmap de Longo Prazo
+
+## Fase 1 — Fundação Estrutural
+
+* Backend modular
+* Separação do Streamlit
+* Isolamento de execução
+* Padronização de ambientes virtuais
+
+## Fase 2 — Plataforma Core
+
+* Event Bus
+* Camada de telemetria
+* Workers distribuídos
+* Orquestração central
+
+## Fase 3 — Camada de IA
+
+* Operações assistidas por IA
+* Correlação inteligente
+* Análise autônoma
+* Raciocínio de ameaças
+
+## Fase 4 — Ecossistema Cloud
+
+* Ambiente multiusuário
+* Autenticação
+* RBAC
+* Workspaces organizacionais
+* Arquitetura SaaS
+
+## Fase 5 — Operações Enterprise
+
+* Execução distribuída
+* Escalabilidade em nuvem
+* Infraestrutura multi-região
+* Observabilidade avançada
+* Ecossistema de automação de segurança
+
+---
+
+# Filosofia
+
+O Sentinel OS não foi concebido para ser apenas mais uma ferramenta de segurança.
+
+O projeto está sendo desenvolvido como um ecossistema operacional focado em operações cibernéticas inteligentes, automação escalável e arquitetura modular de segurança.
+
+---
+
+# Status
+
+Em desenvolvimento ativo.
+
+---
+
+# Autor
+
+Reginaldo Soares de Vasconcelos Filho
+
+---
+
+# Objetivos Futuros
+
+* Operações de Segurança com IA
+* Capacidades de SOC Autônomo
+* Orquestração cloud-native
+* Correlação inteligente de segurança
+* Observabilidade em escala enterprise
+* Automação cibernética inteligente
+
+---
+
+# Sentinel OS
+
+Construindo o futuro das operações cibernéticas inteligentes.
+
