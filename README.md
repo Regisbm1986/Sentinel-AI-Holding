@@ -1,5 +1,9 @@
 # Sentinel OS
 
+<p align="center">
+  <img src="docs/banner.png" alt="Sentinel OS Banner">
+</p>
+
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
 ![Azure](https://img.shields.io/badge/Azure-Cloud-blue?style=for-the-badge&logo=microsoftazure)
 ![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange?style=for-the-badge&logo=ubuntu)
