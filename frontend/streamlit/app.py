@@ -8,6 +8,7 @@ import requests
 import socket
 from backend.modules.nikto.module import run_nikto
 from backend.modules.spiderfoot.module import run_spiderfoot
+from backend.modules.enum4linux.module import run_enum4linux
 
 IP_DA_VM = "20.46.250.89"
 DAGDA_API_URL = "http://127.0.0.1:5000/v1"
@@ -170,13 +171,7 @@ class SentinelOS:
     # =====================================================================
     # MÓDULOS DE ARMA RESTRITA E AUDITORIA OFENSIVA
     # =====================================================================
-    def run_enum4linux(self, alvo):
-        """Enumeração agressiva de SAMBA, IPC$ Shares e LSA Querying"""
-        if alvo:
-            # Comando com verbosidade total (-a) para extrair todos os metadados possíveis
-            self.executar_modulo_tatico(["enum4linux", "-a", alvo], "Enum4Linux-Core")
-        else:
-            st.sidebar.error("Especifique um Vetor de Destino Alvo.")
+    
 
     def run_kube_hunter(self, cluster_ip):
         """Caça ativa de falhas em clusters Kubernetes com suporte a flags dinâmicas"""
@@ -194,21 +189,6 @@ class SentinelOS:
         else:
             st.sidebar.error("Especifique o IP/Domínio do Cluster Kubernetes.")
 
-
-    def run_spiderfoot(self, alvo):
-
-        print("PYTHON USADO:", sys.executable)
-
-        if alvo:
-            sf_script = os.path.expanduser("~/spiderfoot/sf.py")
-            if os.path.exists(sf_script):
-                # Execução silenciosa em backend com coleta massiva de inteligência pública
-                cmd_sf = ["python3", sf_script, "-t", "ALL", "-u", "all", "-q", "-s", alvo]
-                self.executar_modulo_tatico(cmd_sf, "SpiderFoot-OSINT")
-            else:
-                st.sidebar.error("Diretório binário do SpiderFoot não localizado no Servidor.")
-        else:
-            st.sidebar.error("Especifique um Vetor de Destino Alvo.")
 
     def run_john_the_ripper(self, hash_text):
         """Auditoria Cracking Offline de Criptografia e Quebra de Sentenças de Senhas"""
@@ -410,7 +390,11 @@ class SentinelOS:
         st.sidebar.subheader("⚔️ Arsenal Ofensivo (Módulos)")
 
         if st.sidebar.button("Módulo Enum4Linux (SMB Active Scan)", use_container_width=True):
-            self.run_enum4linux(alvo_global)
+
+            run_enum4linux(
+                alvo_global,
+                self.executar_modulo_tatico
+            )
 
         if st.sidebar.button("Módulo Dagda (Docker Static Analysis)", use_container_width=True):
             # Nota: O 'alvo_global' aqui será interpretado como o nome da imagem Docker (ex: nginx:latest)
