@@ -10,6 +10,10 @@ from backend.modules.nikto.module import run_nikto
 from backend.modules.spiderfoot.module import run_spiderfoot
 from backend.modules.enum4linux.module import run_enum4linux
 from backend.modules.john.module import run_john_the_ripper
+from backend.modules.dagda.module import (
+    run_dagda,
+    check_dagda_status
+)
 
 IP_DA_VM = "20.46.250.89"
 DAGDA_API_URL = "http://127.0.0.1:5000/v1"
@@ -21,20 +25,6 @@ def check_port(port):
 st.sidebar.subheader("Status das Ferramentas")
 st.sidebar.write(f"BeEF (3000): {'🟢 Online' if check_port(3000) else '🔴 Offline'}")
 st.sidebar.write(f"SET (80): {'🟢 Online' if check_port(80) else '🔴 Offline'}")
-
-def check_dagda_status():
-    """Verifica se o servidor Dagda está online e o status de inicialização."""
-    try:
-        response = requests.get(f"{DAGDA_API_URL}/vuln/init-status", timeout=5)
-        if response.status_code == 200:
-            return response.json()
-        return {"status": "Erro na API", "code": response.status_code}
-    except requests.exceptions.ConnectionError:
-        return {"status": "Offline", "error": "Servidor Dagda não está respondendo na porta 5000."}
-    except Exception as e:
-        return {"status": "Erro Inesperado", "error": str(e)}
-
-
 
 class SentinelOS:
     def __init__(self):
@@ -50,8 +40,6 @@ class SentinelOS:
             layout="wide",
             initial_sidebar_state="expanded"
         )
-        
-        DAGDA_API_URL = "http://127.0.0.1:5000/v1"
 
         # Inicialização estrutural de estados persistentes do sistema (Session State)
         if "logs" not in st.session_state:
@@ -132,18 +120,6 @@ class SentinelOS:
             self.registrar_log(erro_direto)
             st.error(erro_direto)
 
-    def check_dagda_status():
-        """Verifica se o servidor Dagda está online e o status de inicialização."""
-        try:
-            # Endpoint corrigido para init-status (Evita o erro 404)
-            response = requests.get(f"{DAGDA_API_URL}/vuln/init-status", timeout=5)
-            if response.status_code == 200:
-                return response.json()
-            return {"status": "Erro na API", "code": response.status_code}
-        except requests.exceptions.ConnectionError:
-            return {"status": "Offline", "error": "Servidor Dagda não está respondendo na porta 5000."}
-        except Exception as e:
-            return {"status": "Erro Inesperado", "error": str(e)}
 
     def scan_docker_image(image_name):
         """Dispara a análise de vulnerabilidades em uma imagem Docker."""
@@ -190,46 +166,6 @@ class SentinelOS:
         else:
             st.sidebar.error("Especifique o IP/Domínio do Cluster Kubernetes.")
 
-
-    def run_dagda(self, image_name):
-        """
-        Método da classe SentinelOS que faz a ponte com a API do Dagda.
-        """
-        import streamlit as st
-        import requests
-
-        DAGDA_API_URL = "http://127.0.0.1:5000/v1"
-        
-        st.subheader("🛡️ Análise de Containers (Dagda)")
-        
-        if not image_name:
-            st.warning("Nenhum alvo/imagem global foi definido para a análise.")
-            return
-
-        with st.spinner(f"Auditando a imagem '{image_name}' no Dagda..."):
-            try:
-                # 1. Dispara o escaneamento
-                response = requests.post(f"{DAGDA_API_URL}/check/images/{image_name}", timeout=10)
-                
-                if response.status_code == 202:
-                    st.success(f"Análise da imagem '{image_name}' iniciada com sucesso!")
-                    
-                    # 2. Tenta buscar o histórico logo em seguida
-                    hist_response = requests.get(f"{DAGDA_API_URL}/history/{image_name}", timeout=5)
-                    if hist_response.status_code == 200:
-                        st.json(hist_response.json())
-                    else:
-                        st.info("A análise está rodando em segundo plano. Verifique os relatórios em instantes.")
-                
-                elif response.status_code == 404:
-                    st.error(f"A imagem '{image_name}' não foi encontrada localmente no Docker.")
-                else:
-                    st.error(f"Erro no Dagda: {response.text}")
-                    
-            except requests.exceptions.ConnectionError:
-                st.error("Não foi possível conectar ao Dagda Server. Verifique se ele está rodando na porta 5000.")
-            except Exception as e:
-                st.error(f"Erro inesperado: {str(e)}")
 
     def run_beef_daemon(self):
         import os
@@ -369,9 +305,31 @@ class SentinelOS:
                 self.executar_modulo_tatico
             )
 
-        if st.sidebar.button("Módulo Dagda (Docker Static Analysis)", use_container_width=True):
-            # Nota: O 'alvo_global' aqui será interpretado como o nome da imagem Docker (ex: nginx:latest)
-            self.run_dagda(alvo_global)
+        if st.sidebar.button(
+           "Módulo Dagda (Docker Static Analysis)",
+            use_container_width=True
+):
+
+            resultado = run_dagda(alvo_global)
+
+            if resultado["status"] == "success":
+
+                st.success(resultado["message"])
+
+                if "data" in resultado:
+                    st.json(resultado["data"])
+
+            elif resultado["status"] == "running":
+
+                st.info(resultado["message"])
+
+            elif resultado["status"] == "warning":
+
+                st.warning(resultado["message"])
+
+            else:
+
+                st.error(resultado["message"])
 
         if st.sidebar.button("Módulo Kube-Hunter (K8s Infiltration)", use_container_width=True):
             # Nota: O 'alvo_global' aqui será o IP ou domínio do cluster Kubernetes
