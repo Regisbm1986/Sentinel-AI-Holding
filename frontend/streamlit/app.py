@@ -9,6 +9,7 @@ import socket
 from backend.modules.nikto.module import run_nikto
 from backend.modules.spiderfoot.module import run_spiderfoot
 from backend.modules.enum4linux.module import run_enum4linux
+from backend.modules.john.module import run_john_the_ripper
 
 IP_DA_VM = "20.46.250.89"
 DAGDA_API_URL = "http://127.0.0.1:5000/v1"
@@ -189,34 +190,6 @@ class SentinelOS:
         else:
             st.sidebar.error("Especifique o IP/Domínio do Cluster Kubernetes.")
 
-
-    def run_john_the_ripper(self, hash_text):
-        """Auditoria Cracking Offline de Criptografia e Quebra de Sentenças de Senhas"""
-        if hash_text:
-            with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_file:
-                temp_file.write(hash_text + "\n")
-                temp_file_path = temp_file.name
-            
-            wordlist_path = "/usr/share/wordlists/rockyou.txt"
-            if os.path.exists(wordlist_path):
-                # Regras táticas de mutação de palavras ativadas (--rules)
-                cmd_john = ["john", f"--wordlist={wordlist_path}", "--rules", temp_file_path]
-            else:
-                cmd_john = ["john", "--incremental", temp_file_path]
-                self.registrar_log("[⚠️] Wordlist militar ausente. Chaveando força bruta para Modo Incremental.")
-                
-            self.executar_modulo_tatico(cmd_john, "John-Cracker")
-            
-            try:
-                resultado_show = subprocess.run(["john", "--show", temp_file_path], capture_output=True, text=True)
-                if resultado_show.stdout:
-                    self.registrar_log("\n[=== EXTRACTED CRACKED CREDENTIALS ===]")
-                    self.registrar_log(resultado_show.stdout.strip())
-                os.unlink(temp_file_path)
-            except Exception as ex:
-                self.registrar_log(f"[-] Erro ao expurgar resíduos criptográficos: {ex}")
-        else:
-            st.sidebar.error("Insira hashes válidos para quebra.")
 
     def run_dagda(self, image_name):
         """
@@ -423,7 +396,12 @@ class SentinelOS:
         hash_input_area = st.sidebar.text_area("Entrada de Hashes Capturados:", placeholder="Cole hashes de senhas...")
 
         if st.sidebar.button("Disparar Força Bruta (John)", use_container_width=True):
-            self.run_john_the_ripper(hash_input_area)
+
+           run_john_the_ripper(
+               hash_input_area,
+               self.executar_modulo_tatico,
+               self.registrar_log
+           )
 
         st.sidebar.divider()
         st.sidebar.subheader("📡 Infraestrutura Remota")
