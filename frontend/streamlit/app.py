@@ -7,7 +7,7 @@ import streamlit as st
 import requests
 import socket
 from backend.modules.nikto.module import run_nikto
-
+from backend.modules.spiderfoot.module import run_spiderfoot
 
 IP_DA_VM = "20.46.250.89"
 DAGDA_API_URL = "http://127.0.0.1:5000/v1"
@@ -196,7 +196,9 @@ class SentinelOS:
 
 
     def run_spiderfoot(self, alvo):
-        """Módulo de Guerra de Informação e Inteligência OSINT Total"""
+
+        print("PYTHON USADO:", sys.executable)
+
         if alvo:
             sf_script = os.path.expanduser("~/spiderfoot/sf.py")
             if os.path.exists(sf_script):
@@ -426,7 +428,11 @@ class SentinelOS:
             )
 
         if st.sidebar.button("Módulo SpiderFoot (Massive OSINT)", use_container_width=True):
-            self.run_spiderfoot(alvo_global)
+
+           run_spiderfoot(
+               alvo_global,
+               self.executar_modulo_tatico
+           )
 
         st.sidebar.divider()
         st.sidebar.subheader("🔑 Criptoanálise / Cracking")
