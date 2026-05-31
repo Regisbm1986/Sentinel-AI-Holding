@@ -14,9 +14,12 @@ from backend.modules.dagda.module import (
     run_dagda,
     check_dagda_status
 )
+from backend.modules.kubehunter.module import run_kube_hunter
+from backend.modules.beef.module import run_beef_daemon
+from backend.modules.setoolkit.module import run_setoolkit_daemon
 
 IP_DA_VM = "20.46.250.89"
-DAGDA_API_URL = "http://127.0.0.1:5000/v1"
+
 
 def check_port(port):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -121,56 +124,9 @@ class SentinelOS:
             st.error(erro_direto)
 
 
-    def scan_docker_image(image_name):
-        """Dispara a análise de vulnerabilidades em uma imagem Docker."""
-        try:
-            response = requests.post(f"{DAGDA_API_URL}/check/images/{image_name}", timeout=10)
-            if response.status_code == 202:
-                return {"sucesso": True, "msg": f"Análise da imagem '{image_name}' iniciada com sucesso!"}
-            elif response.status_code == 404:
-                return {"sucesso": False, "error": f"Imagem '{image_name}' não foi encontrada localmente."}
-            return {"sucesso": False, "error": response.text}
-        except requests.exceptions.ConnectionError:
-            return {"sucesso": False, "error": "Não foi possível conectar ao Dagda Server."}
-        except Exception as e:
-            return {"sucesso": False, "error": str(e)}
-
-    def get_scan_history(image_name):
-        """Recupera o histórico completo de relatórios de segurança."""
-        try:
-            response = requests.get(f"{DAGDA_API_URL}/history/{image_name}", timeout=5)
-            if response.status_code == 200:
-                return response.json()
-            return []
-        except Exception:
-            return []
-
     # =====================================================================
     # MÓDULOS DE ARMA RESTRITA E AUDITORIA OFENSIVA
-    # =====================================================================
-    
-
-    def run_kube_hunter(self, cluster_ip):
-        """Caça ativa de falhas em clusters Kubernetes com suporte a flags dinâmicas"""
-        if cluster_ip:
-            self.registrar_log(f"[☸️] Preparando Kube-Hunter contra: {cluster_ip}")
-            
-            # Comando base
-            comando = ["kube-hunter", "--remote", cluster_ip]
-            
-            # Se o operador digitou algo em flags_extras, nós injetamos no arsenal
-            if flags_extras:
-                comando.extend(shlex.split(flags_extras))
-                
-            self.executar_modulo_tatico(comando, "KubeHunter-K8s")
-        else:
-            st.sidebar.error("Especifique o IP/Domínio do Cluster Kubernetes.")
-
-
-    def run_beef_daemon(self):
-        import os
-        # O '&' no final coloca em background. O log permite ver se houve erro.
-        os.system("nohup beef-xss > /tmp/beef.log 2>&1 &")
+    # ====================================================================
 
     def run_setoolkit_daemon(self):
         import os
@@ -306,34 +262,39 @@ class SentinelOS:
             )
 
         if st.sidebar.button(
-           "Módulo Dagda (Docker Static Analysis)",
-            use_container_width=True
+          "Módulo Dagda (Docker Static Analysis)",
+           use_container_width=True
 ):
 
-            resultado = run_dagda(alvo_global)
+           resultado = run_dagda(alvo_global)
 
-            if resultado["status"] == "success":
+           if resultado["status"] == "success":
 
                 st.success(resultado["message"])
 
                 if "data" in resultado:
                     st.json(resultado["data"])
 
-            elif resultado["status"] == "running":
+           elif resultado["status"] == "running":
 
-                st.info(resultado["message"])
+                    st.info(resultado["message"])
 
-            elif resultado["status"] == "warning":
+           elif resultado["status"] == "warning":
 
-                st.warning(resultado["message"])
+               st.warning(resultado["message"])
 
-            else:
+           else:
 
-                st.error(resultado["message"])
+               st.error(resultado["message"])
 
-        if st.sidebar.button("Módulo Kube-Hunter (K8s Infiltration)", use_container_width=True):
-            # Nota: O 'alvo_global' aqui será o IP ou domínio do cluster Kubernetes
-            self.run_kube_hunter(alvo_global)
+        if st.sidebar.button("Kube Hunter"):
+
+            run_kube_hunter(
+                alvo_global,
+                self.executar_modulo_tatico,
+                self.registrar_log,
+                flags_extras
+            )
 
         if st.sidebar.button("Módulo Nikto DAST (Evasion Scan)", use_container_width=True):
 
@@ -361,26 +322,13 @@ class SentinelOS:
                self.registrar_log
            )
 
-        st.sidebar.divider()
-        st.sidebar.subheader("📡 Infraestrutura Remota")
+        run_setoolkit_daemon(
+            self.registrar_log
+        )
 
-        if st.sidebar.button("Spawn Daemon SEToolkit", use_container_width=True):
-            self.run_setoolkit_daemon()
-            st.sidebar.success("Servidor SEToolkit iniciado em segundo plano!")
-        
-        IP_DA_VM = "20.46.250.89" # Seu IP Público
-        st.sidebar.link_button("🎣 Acessar Terminal do SET", "http://20.46.250.89:7681")
-
-
-        if st.sidebar.button("Spawn Daemon BeEF Server", use_container_width=True):
-            self.run_beef_daemon()
-            st.sidebar.success("Servidor BeEF iniciado em segundo plano!")
-        
-        IP_DA_VM = "20.46.250.89" # Seu IP Público
-        st.sidebar.link_button(
-            "💻 Acessar Painel do BeEF", 
-            f"http://{IP_DA_VM}:3000/ui/panel", 
-            use_container_width=True)
+        run_beef_daemon(
+            self.registrar_log
+         )
 
         st.sidebar.divider()
         st.sidebar.subheader("🤖 Núcleo de Inteligência Artificial")
