@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from backend.api.routes.nikto import router as nikto_router
 from pydantic import BaseModel
 from fastapi import APIRouter
+from backend.api.routes.spiderfoot import router as spiderfoot_router
 
 router = APIRouter()
 
@@ -40,5 +41,10 @@ def health():
 
 app.include_router(
     nikto_router,
+    prefix="/api"
+)
+
+app.include_router(
+    spiderfoot_router,
     prefix="/api"
 )
