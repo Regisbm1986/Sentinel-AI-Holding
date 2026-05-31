@@ -1,7 +1,7 @@
 import subprocess
 
 
-def run_nikto(target, executor):
+def run_nikto_api(target):
 
     clean_target = (
         target
@@ -11,12 +11,35 @@ def run_nikto(target, executor):
     )
 
     cmd_nikto = [
-        "nikto",
-        "-h", clean_target,
-        "-Tuning", "1,2,3,4,b,x",
-        "-evasion", "1,5",
-        "-custom-header",
-        "User-Agent: Mozilla/5.0"
-    ]
+    "nikto",
+    "-h",
+    clean_target
+]
 
-    executor(cmd_nikto, "Nikto-Warfare")
+    try:
+
+        print("EXECUTANDO:", cmd_nikto)
+
+        result = subprocess.run(
+            cmd_nikto,
+            capture_output=True,
+            text=True,
+        )
+
+        print("RETORNO:", result.returncode)
+        print("STDERR:", result.stderr)
+        
+        return {
+            "status": "success",
+            "command": cmd_nikto,
+            "target": clean_target,
+            "output": result.stdout[:5000],
+            "stderr": result.stderr
+        }
+
+    except Exception as ex:
+
+        return {
+            "status": "error",
+            "error": str(ex)
+        }
