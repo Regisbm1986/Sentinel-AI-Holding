@@ -1,5 +1,6 @@
 import os
 
+from backend.core.config import API_ROUTES_DIR, API_SCHEMAS_DIR, MODULES_DIR
 from backend.agents.agent_controller import AgentController
 
 
@@ -9,20 +10,11 @@ class SecurityAgent:
 
         issues = []
 
-        routes_path = (
-            "/home/sentineladmin/sentinel-os/"
-            "backend/api/routes"
-        )
+        routes_path = API_ROUTES_DIR
 
-        schemas_path = (
-            "/home/sentineladmin/sentinel-os/"
-            "backend/api/schemas"
-        )
+        schemas_path = API_SCHEMAS_DIR
 
-        modules_path = (
-            "/home/sentineladmin/sentinel-os/"
-            "backend/modules"
-        )
+        modules_path = MODULES_DIR
 
         if not os.path.exists(modules_path):
             return []

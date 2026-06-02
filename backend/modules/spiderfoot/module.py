@@ -1,17 +1,19 @@
 import os
 import sys
 
+from backend.core.config import PYTHON_BIN, SPIDERFOOT_SCRIPT
+
 def run_spiderfoot(target, executor):
 
     if target:
 
-        sf_script = os.path.expanduser("~/spiderfoot/sf.py")
+        sf_script = SPIDERFOOT_SCRIPT
 
         if os.path.exists(sf_script):
 
             cmd_sf = [
-                "/home/sentineladmin/sentinel-os/venv/bin/python",
-                sf_script,
+                str(PYTHON_BIN),
+                str(sf_script),
                 "-t", "ALL",
                 "-u", "all",
                 "-q",

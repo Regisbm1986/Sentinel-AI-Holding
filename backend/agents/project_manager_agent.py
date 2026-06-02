@@ -6,6 +6,8 @@ from backend.agents.code_agent import CodeAgent
 from backend.agents.agent_controller import AgentController
 import os
 
+from backend.core.config import API_ROUTES_DIR, MODULES_DIR
+
 class ProjectManagerAgent:
 
     def daily_briefing(self):
@@ -120,15 +122,9 @@ class ProjectManagerAgent:
 
     def generate_roadmap(self):
 
-        modules_path = (
-            "/home/sentineladmin/"
-            "sentinel-os/backend/modules"
-        )
+        modules_path = MODULES_DIR
 
-        routes_path = (
-            "/home/sentineladmin/"
-            "sentinel-os/backend/api/routes"
-        )
+        routes_path = API_ROUTES_DIR
 
         completed = []
 

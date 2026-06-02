@@ -1,13 +1,12 @@
 import json
 import os
 
+from backend.core.config import AGENT_TASKS_DIR
+
 
 class AgentController:
 
-    TASK_PATH = (
-        "/home/sentineladmin/sentinel-os/"
-        "backend/agents/tasks"
-    )
+    TASK_PATH = AGENT_TASKS_DIR
 
     def _load(self, filename):
 

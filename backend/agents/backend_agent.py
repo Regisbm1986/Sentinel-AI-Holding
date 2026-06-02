@@ -1,5 +1,7 @@
 import os
 
+from backend.core.config import API_ROUTES_DIR
+
 
 class BackendAgent:
 
@@ -43,7 +45,7 @@ class BackendAgent:
             "kubehunter": False
         }
 
-        routes_path = "/home/sentineladmin/sentinel-os/backend/api/routes"
+        routes_path = API_ROUTES_DIR
 
         if not os.path.exists(routes_path):
             return modules

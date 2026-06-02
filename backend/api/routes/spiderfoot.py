@@ -1,13 +1,10 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from backend.api.schemas.spiderfoot import SpiderFootRequest
+from backend.core.config import PYTHON_BIN, SPIDERFOOT_SCRIPT
 import subprocess
 import os
 
 router = APIRouter()
-
-
-class SpiderFootRequest(BaseModel):
-    target: str
 
 
 @router.get("/spiderfoot")
@@ -22,7 +19,7 @@ def spiderfoot_status():
 @router.post("/spiderfoot")
 def run_spiderfoot_scan(payload: SpiderFootRequest):
 
-    sf_script = os.path.expanduser("~/spiderfoot/sf.py")
+    sf_script = SPIDERFOOT_SCRIPT
 
     if not os.path.exists(sf_script):
         return {
@@ -31,8 +28,8 @@ def run_spiderfoot_scan(payload: SpiderFootRequest):
         }
 
     cmd = [
-        "/home/sentineladmin/sentinel-os/venv/bin/python",
-        sf_script,
+        str(PYTHON_BIN),
+        str(sf_script),
         "-t", "ALL",
         "-u", "all",
         "-q",

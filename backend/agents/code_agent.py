@@ -1,14 +1,13 @@
 import json
 import os
 
+from backend.core.config import AGENT_TASKS_DIR, API_ROUTES_DIR, MODULES_DIR
+
 from backend.agents.agent_controller import AgentController
 
 class CodeAgent:
 
-    TASK_PATH = (
-        "/home/sentineladmin/sentinel-os/"
-        "backend/agents/tasks"
-    )
+    TASK_PATH = AGENT_TASKS_DIR
 
     def get_next_task(self):
 
@@ -84,10 +83,7 @@ class CodeAgent:
 
     def discover_modules(self):
 
-        modules_path = (
-            "/home/sentineladmin/"
-            "sentinel-os/backend/modules"
-        )
+        modules_path = MODULES_DIR
 
         modules = []
 
@@ -112,10 +108,7 @@ class CodeAgent:
 
         modules = self.discover_modules()
 
-        routes_path = (
-            "/home/sentineladmin/"
-            "sentinel-os/backend/api/routes"
-        )
+        routes_path = API_ROUTES_DIR
 
         missing = []
 

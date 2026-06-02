@@ -6,6 +6,7 @@ import tempfile
 import streamlit as st
 import requests
 import socket
+from backend.core.config import SENTINEL_PROJECTS_DIR
 from backend.modules.nikto.module import run_nikto
 from backend.modules.spiderfoot.module import run_spiderfoot
 from backend.modules.enum4linux.module import run_enum4linux
@@ -355,7 +356,7 @@ class SentinelOS:
             if st.button("Criar Workspace Isolado", use_container_width=True):
                 if workspace_name:
                     ws_limpo = workspace_name.strip().replace(" ", "_")
-                    os.makedirs(os.path.expanduser(f"~/sentinel_projects/{ws_limpo}"), exist_ok=True)
+                    os.makedirs(SENTINEL_PROJECTS_DIR / ws_limpo, exist_ok=True)
                     self.registrar_log(f"[📁] Novo Workspace de Operação instanciado para o cliente: {ws_limpo}")
                     st.success("Workspace Isolado.")
                     

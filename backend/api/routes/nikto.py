@@ -1,13 +1,9 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
 
+from backend.api.schemas.nikto import NiktoRequest
 from backend.modules.nikto.module import run_nikto_api
 
 router = APIRouter()
-
-
-class NiktoRequest(BaseModel):
-    target: str
 
 
 @router.post("/nikto")
