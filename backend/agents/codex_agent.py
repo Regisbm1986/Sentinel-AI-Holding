@@ -2,22 +2,22 @@ import json
 import os
 
 from backend.core.config import AGENT_TASKS_DIR
+from backend.agents.agent_controller import AgentController
 
 
 class CodexAgent:
 
     TASK_PATH = AGENT_TASKS_DIR
 
+    def get_approved_tasks(self):
+
+        controller = AgentController()
+
+        return controller.get_approved_tasks()
+
     def get_next_task(self):
 
-        path = os.path.join(
-            self.TASK_PATH,
-            "approved.json"
-        )
-
-        with open(path, "r") as f:
-
-            tasks = json.load(f)
+        tasks = self.get_approved_tasks()
 
         if not tasks:
 

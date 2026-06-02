@@ -67,6 +67,12 @@ class AgentController:
             "backlog.json"
         )
 
+    def get_approved_tasks(self):
+
+        return self._load(
+            "approved.json"
+        )
+
     def approve_task(self, task_id):
 
         backlog = self._load(
