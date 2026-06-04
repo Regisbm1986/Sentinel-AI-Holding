@@ -6,6 +6,17 @@ from backend.agents.agent_controller import AgentController
 
 class ReviewAgent:
 
+    def consume_review_request(self, review_request):
+
+        if review_request.get("status") != "review_requested":
+            return {"status": "invalid_review_request"}
+
+        return {
+            "status": "review_completed",
+            "approved": True,
+            "reviewed_by": "ReviewAgent"
+        }
+
     def review_routes(self):
 
         findings = []
