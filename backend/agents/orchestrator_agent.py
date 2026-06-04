@@ -1,3 +1,4 @@
+from backend.agents.agent_memory import AgentMemory
 from backend.agents.backend_agent import BackendAgent
 from backend.agents.codex_agent import CodexAgent
 from backend.agents.task_executor import TaskExecutor
@@ -30,6 +31,14 @@ class OrchestratorAgent:
         implementation_plan = backend_agent.generate_implementation_plan(
             task
         )
+
+        memory = AgentMemory()
+
+        memory.remember({
+            "task_id": task["id"],
+            "task": task["task"],
+            "status": "completed"
+        })
 
         return {
             "status": "orchestration_completed",
