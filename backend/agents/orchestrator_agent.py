@@ -1,5 +1,6 @@
 from backend.agents.backend_agent import BackendAgent
 from backend.agents.codex_agent import CodexAgent
+from backend.agents.task_executor import TaskExecutor
 
 
 class OrchestratorAgent:
@@ -19,6 +20,10 @@ class OrchestratorAgent:
         task = cycle_result["task"]
         plan = cycle_result["plan"]
         review = cycle_result["review"]
+
+        task_executor = TaskExecutor()
+
+        task_executor.execute(task["id"])
 
         backend_agent = BackendAgent()
 
