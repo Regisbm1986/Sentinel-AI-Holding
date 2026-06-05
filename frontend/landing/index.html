@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sentinel OS | Plataforma institucional de automacao e seguranca</title>
+  <title>Sentinel OS | Autonomous Cyber Defense Platform</title>
   <meta
     name="description"
-    content="Sentinel OS e uma plataforma institucional para orquestrar agentes, fluxos de automacao, observabilidade e seguranca operacional."
+    content="Sentinel OS is an autonomous cyber defense platform for orchestrating agents, security workflows, observability and operational control."
   />
   <style>
     :root {
@@ -158,6 +158,7 @@
     h1,
     h2,
     h3,
+    h4,
     p {
       margin-top: 0;
     }
@@ -336,8 +337,15 @@
       gap: 16px;
     }
 
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
     .feature-card,
-    .roadmap-item {
+    .roadmap-item,
+    .info-card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: rgba(21, 31, 43, 0.72);
@@ -357,13 +365,15 @@
     }
 
     .feature-card h3,
-    .roadmap-item h3 {
+    .roadmap-item h3,
+    .info-card h3 {
       margin-bottom: 10px;
       font-size: 1.05rem;
     }
 
     .feature-card p,
-    .roadmap-item p {
+    .roadmap-item p,
+    .info-card p {
       margin-bottom: 0;
       color: var(--muted);
       font-size: 0.94rem;
@@ -371,6 +381,77 @@
 
     .architecture {
       background: rgba(255, 255, 255, 0.025);
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .vision-panel,
+    .support-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(21, 31, 43, 0.76);
+      padding: 28px;
+    }
+
+    .vision-panel h3,
+    .support-panel h3 {
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .vision-panel p,
+    .support-panel p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .principles {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .principles li {
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius);
+      background: rgba(11, 16, 23, 0.56);
+    }
+
+    .principles strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .support-item {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius);
+      background: rgba(11, 16, 23, 0.5);
+    }
+
+    .support-item h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .support-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
     .architecture-grid {
@@ -484,7 +565,8 @@
 
     @media (max-width: 980px) {
       .hero-grid,
-      .architecture-grid {
+      .architecture-grid,
+      .vision-grid {
         grid-template-columns: 1fr;
       }
 
@@ -493,7 +575,9 @@
       }
 
       .feature-grid,
-      .roadmap-grid {
+      .roadmap-grid,
+      .info-grid,
+      .support-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -572,7 +656,10 @@
       }
 
       .feature-grid,
-      .roadmap-grid {
+      .roadmap-grid,
+      .info-grid,
+      .support-grid,
+      .vision-grid {
         grid-template-columns: 1fr;
       }
 
@@ -591,6 +678,9 @@
           <span>Sentinel OS</span>
         </a>
         <div class="nav-links">
+          <a href="#who">Who is it for?</a>
+          <a href="#vision">Vision</a>
+          <a href="#support">Support</a>
           <a href="#features">Features</a>
           <a href="#architecture">Architecture</a>
           <a href="#roadmap">Roadmap</a>
@@ -603,11 +693,11 @@
       <section id="hero" class="hero">
         <div class="shell hero-grid">
           <div>
-            <p class="eyebrow">Sistema operacional para agentes e automacao</p>
-            <h1>Sentinel OS</h1>
+            <p class="eyebrow">Sentinel OS</p>
+            <h1>Autonomous Cyber Defense Platform</h1>
             <p class="hero-copy">
-              Uma base institucional para coordenar agentes, rotinas de seguranca,
-              observabilidade e operacoes automatizadas em um unico plano de controle.
+              Sentinel OS coordinates autonomous defense workflows, security agents,
+              observability and operational control in a single platform for modern cyber defense.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#github">Ver no GitHub</a>
@@ -617,7 +707,7 @@
 
           <aside class="hero-panel" aria-label="Resumo operacional">
             <div class="panel-header">
-              <span>Sentinel Control Plane</span>
+              <span>Autonomous Defense Runtime</span>
               <span class="status">online</span>
             </div>
             <div class="signal-map">
@@ -625,13 +715,135 @@
               <div class="beam two"></div>
               <div class="beam three"></div>
               <div class="beam four"></div>
-              <div class="node a"><strong>Agents</strong><span>execucao coordenada</span></div>
-              <div class="node b"><strong>API</strong><span>rotas e contratos</span></div>
-              <div class="node core"><strong>Core</strong><span>orquestracao central</span></div>
-              <div class="node c"><strong>Security</strong><span>analise e defesa</span></div>
-              <div class="node d"><strong>Ops</strong><span>monitoramento continuo</span></div>
+              <div class="node a"><strong>Sensors</strong><span>continuous signals</span></div>
+              <div class="node b"><strong>API</strong><span>secure contracts</span></div>
+              <div class="node core"><strong>Core</strong><span>defense orchestration</span></div>
+              <div class="node c"><strong>Security</strong><span>detection and response</span></div>
+              <div class="node d"><strong>Ops</strong><span>governed execution</span></div>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section id="who">
+        <div class="shell">
+          <div class="section-heading">
+            <h2>Who is Sentinel OS for?</h2>
+            <p>
+              Built for teams that need structured defense automation without losing
+              oversight, traceability or the ability to review every step.
+            </p>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <div class="icon">01</div>
+              <h3>Security teams</h3>
+              <p>Run detection, investigation and response workflows from a single operational surface.</p>
+            </article>
+            <article class="info-card">
+              <div class="icon">02</div>
+              <h3>Platform engineers</h3>
+              <p>Connect internal services, agents and controls through modular, reviewable interfaces.</p>
+            </article>
+            <article class="info-card">
+              <div class="icon">03</div>
+              <h3>Builders and maintainers</h3>
+              <p>Extend the system with clear boundaries, predictable contracts and technical contribution paths.</p>
+            </article>
+            <article class="info-card">
+              <div class="icon">04</div>
+              <h3>Organizations in transition</h3>
+              <p>Evolve from manual operations to autonomous defense with phased adoption and visible control.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="vision" class="architecture">
+        <div class="shell">
+          <div class="section-heading">
+            <h2>Vision</h2>
+            <p>
+              Sentinel OS aims to make cyber defense more autonomous, auditable and
+              resilient by design.
+            </p>
+          </div>
+          <div class="vision-grid">
+            <article class="vision-panel">
+              <h3>Security that can act, not just alert</h3>
+              <p>
+                The platform is designed to turn signals into structured action:
+                detect, prioritize, coordinate and execute with guardrails.
+              </p>
+              <ul class="principles">
+                <li>
+                  <strong>Autonomy with oversight</strong>
+                  Every decision path remains inspectable and reviewable.
+                </li>
+                <li>
+                  <strong>Defense as a system</strong>
+                  Security, observability and operations work together instead of separately.
+                </li>
+                <li>
+                  <strong>Built for extension</strong>
+                  New agents, policies and workflows can be added without redesigning the core.
+                </li>
+              </ul>
+            </article>
+            <article class="vision-panel">
+              <h3>What the platform should become</h3>
+              <p>
+                A dependable operating layer for autonomous cyber defense across teams,
+                workloads and environments.
+              </p>
+              <ul class="principles">
+                <li>
+                  <strong>Operational clarity</strong>
+                  One control plane for signals, decisions and outcomes.
+                </li>
+                <li>
+                  <strong>Technical trust</strong>
+                  Transparent architecture that welcomes review and contribution.
+                </li>
+                <li>
+                  <strong>Incremental adoption</strong>
+                  Start small, validate quickly and scale with confidence.
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="support">
+        <div class="shell">
+          <div class="section-heading">
+            <h2>Support Sentinel OS</h2>
+            <p>
+              Help the project grow through review, implementation, testing, documentation and
+              long-term operational feedback.
+            </p>
+          </div>
+          <div class="support-panel">
+            <p>
+              The fastest way to support the project is to use it, inspect it and improve it
+              with concrete technical contributions.
+            </p>
+            <div class="support-grid">
+              <article class="support-item">
+                <h4>Review the architecture</h4>
+                <p>Check the control plane, boundaries and workflows for gaps, risks and simplification opportunities.</p>
+              </article>
+              <article class="support-item">
+                <h4>Contribute code</h4>
+                <p>Improve frontend, backend, agents and documentation with focused, reviewable changes.</p>
+              </article>
+              <article class="support-item">
+                <h4>Share operational feedback</h4>
+                <p>Report what works in real environments so the platform can mature with practical constraints in mind.</p>
+              </article>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -683,7 +895,7 @@
               <article class="layer">
                 <small>Interface</small>
                 <h3>Frontend institucional e operacional</h3>
-                <p>Superficies para apresentacao, paines e interacao com fluxos automatizados.</p>
+                <p>Superficies para apresentacao, paineis e interacao com fluxos automatizados.</p>
               </article>
               <article class="layer">
                 <small>Backend</small>
@@ -776,10 +988,10 @@
       <section id="github">
         <div class="shell">
           <div class="github-band">
-            <h2>Aberto para evolucao, revisao e contribuicao tecnica.</h2>
+            <h2>Open for evolution, review and technical contribution.</h2>
             <p>
-              Acompanhe o desenvolvimento, revise a arquitetura e contribua com melhorias
-              para tornar o Sentinel OS mais robusto, observavel e facil de operar.
+              Follow the development, review the architecture and contribute improvements
+              that make Sentinel OS more robust, observable and easier to operate.
             </p>
             <div class="github-actions">
               <a class="button primary" href="https://github.com/Regisbm1986/Sentinel-OS-2.0" target="_blank" rel="noreferrer">Abrir GitHub</a>
