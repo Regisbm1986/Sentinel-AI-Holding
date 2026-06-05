@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sentinel OS | Autonomous Cyber Defense Platform</title>
+  <title>Sentinel OS | Plataforma Autônoma de Defesa Cibernética</title>
   <meta
     name="description"
-    content="Sentinel OS is an autonomous cyber defense platform for orchestrating agents, security workflows, observability and operational control."
+    content="Sentinel OS é uma plataforma autônoma de defesa cibernética para orquestrar agentes, fluxos de segurança, observabilidade e controle operacional."
   />
   <style>
     :root {
@@ -454,6 +454,39 @@
       font-size: 0.92rem;
     }
 
+    .support-goals {
+      margin-top: 20px;
+    }
+
+    .support-goals h3 {
+      margin: 0 0 16px;
+      font-size: 1.2rem;
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .goal-item {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius);
+      background: rgba(11, 16, 23, 0.5);
+    }
+
+    .goal-item h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .goal-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
     .architecture-grid {
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
@@ -577,7 +610,8 @@
       .feature-grid,
       .roadmap-grid,
       .info-grid,
-      .support-grid {
+      .support-grid,
+      .goal-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -659,6 +693,7 @@
       .roadmap-grid,
       .info-grid,
       .support-grid,
+      .goal-grid,
       .vision-grid {
         grid-template-columns: 1fr;
       }
@@ -678,12 +713,12 @@
           <span>Sentinel OS</span>
         </a>
         <div class="nav-links">
-          <a href="#who">Who is it for?</a>
-          <a href="#vision">Vision</a>
-          <a href="#support">Support</a>
-          <a href="#features">Features</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#roadmap">Roadmap</a>
+          <a href="#who">Para quem é?</a>
+          <a href="#vision">Visão</a>
+          <a href="#support">Apoio</a>
+          <a href="#features">Recursos</a>
+          <a href="#architecture">Arquitetura</a>
+          <a href="#roadmap">Roteiro</a>
           <a href="#github">GitHub</a>
         </div>
       </nav>
@@ -694,10 +729,10 @@
         <div class="shell hero-grid">
           <div>
             <p class="eyebrow">Sentinel OS</p>
-            <h1>Autonomous Cyber Defense Platform</h1>
+            <h1>Plataforma autônoma de defesa cibernética</h1>
             <p class="hero-copy">
-              Sentinel OS coordinates autonomous defense workflows, security agents,
-              observability and operational control in a single platform for modern cyber defense.
+              O Sentinel OS coordena fluxos autônomos de defesa, agentes de segurança,
+              observabilidade e controle operacional em uma única plataforma para defesa cibernética moderna.
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#github">Ver no GitHub</a>
@@ -707,19 +742,19 @@
 
           <aside class="hero-panel" aria-label="Resumo operacional">
             <div class="panel-header">
-              <span>Autonomous Defense Runtime</span>
-              <span class="status">online</span>
+              <span>Tempo de execução da defesa autônoma</span>
+              <span class="status">ativo</span>
             </div>
             <div class="signal-map">
               <div class="beam one"></div>
               <div class="beam two"></div>
               <div class="beam three"></div>
               <div class="beam four"></div>
-              <div class="node a"><strong>Sensors</strong><span>continuous signals</span></div>
-              <div class="node b"><strong>API</strong><span>secure contracts</span></div>
-              <div class="node core"><strong>Core</strong><span>defense orchestration</span></div>
-              <div class="node c"><strong>Security</strong><span>detection and response</span></div>
-              <div class="node d"><strong>Ops</strong><span>governed execution</span></div>
+              <div class="node a"><strong>Sensores</strong><span>sinais contínuos</span></div>
+              <div class="node b"><strong>API</strong><span>contratos seguros</span></div>
+              <div class="node core"><strong>Núcleo</strong><span>orquestração da defesa</span></div>
+              <div class="node c"><strong>Segurança</strong><span>detecção e resposta</span></div>
+              <div class="node d"><strong>Operações</strong><span>execução governada</span></div>
             </div>
           </aside>
         </div>
@@ -728,32 +763,32 @@
       <section id="who">
         <div class="shell">
           <div class="section-heading">
-            <h2>Who is Sentinel OS for?</h2>
+            <h2>Para quem o Sentinel OS foi criado?</h2>
             <p>
-              Built for teams that need structured defense automation without losing
-              oversight, traceability or the ability to review every step.
+              Criado para equipes que precisam de automação estruturada de defesa sem perder
+              supervisão, rastreabilidade ou a capacidade de revisar cada etapa.
             </p>
           </div>
           <div class="info-grid">
             <article class="info-card">
               <div class="icon">01</div>
-              <h3>Security teams</h3>
-              <p>Run detection, investigation and response workflows from a single operational surface.</p>
+              <h3>Equipes de segurança</h3>
+              <p>Executam fluxos de detecção, investigação e resposta em uma única superfície operacional.</p>
             </article>
             <article class="info-card">
               <div class="icon">02</div>
-              <h3>Platform engineers</h3>
-              <p>Connect internal services, agents and controls through modular, reviewable interfaces.</p>
+              <h3>Engenharia de plataforma</h3>
+              <p>Conectam serviços internos, agentes e controles por interfaces modulares e auditáveis.</p>
             </article>
             <article class="info-card">
               <div class="icon">03</div>
-              <h3>Builders and maintainers</h3>
-              <p>Extend the system with clear boundaries, predictable contracts and technical contribution paths.</p>
+              <h3>Construtores e mantenedores</h3>
+              <p>Expandem o sistema com limites claros, contratos previsíveis e caminhos técnicos de contribuição.</p>
             </article>
             <article class="info-card">
               <div class="icon">04</div>
-              <h3>Organizations in transition</h3>
-              <p>Evolve from manual operations to autonomous defense with phased adoption and visible control.</p>
+              <h3>Organizações em transição</h3>
+              <p>Evoluem de operações manuais para defesa autônoma com adoção faseada e controle visível.</p>
             </article>
           </div>
         </div>
@@ -762,52 +797,52 @@
       <section id="vision" class="architecture">
         <div class="shell">
           <div class="section-heading">
-            <h2>Vision</h2>
+            <h2>Visão</h2>
             <p>
-              Sentinel OS aims to make cyber defense more autonomous, auditable and
-              resilient by design.
+              O Sentinel OS busca tornar a defesa cibernética mais autônoma, auditável e
+              resiliente por projeto.
             </p>
           </div>
           <div class="vision-grid">
             <article class="vision-panel">
-              <h3>Security that can act, not just alert</h3>
+              <h3>Segurança que atua, não apenas alerta</h3>
               <p>
-                The platform is designed to turn signals into structured action:
-                detect, prioritize, coordinate and execute with guardrails.
+                A plataforma foi desenhada para transformar sinais em ação estruturada:
+                detectar, priorizar, coordenar e executar com salvaguardas.
               </p>
               <ul class="principles">
                 <li>
-                  <strong>Autonomy with oversight</strong>
-                  Every decision path remains inspectable and reviewable.
+                  <strong>Autonomia com supervisão</strong>
+                  Cada caminho de decisão permanece inspecionável e revisável.
                 </li>
                 <li>
-                  <strong>Defense as a system</strong>
-                  Security, observability and operations work together instead of separately.
+                  <strong>Defesa como sistema</strong>
+                  Segurança, observabilidade e operações trabalham juntas em vez de separadas.
                 </li>
                 <li>
-                  <strong>Built for extension</strong>
-                  New agents, policies and workflows can be added without redesigning the core.
+                  <strong>Feito para extensão</strong>
+                  Novos agentes, políticas e fluxos podem ser adicionados sem redesenhar o núcleo.
                 </li>
               </ul>
             </article>
             <article class="vision-panel">
-              <h3>What the platform should become</h3>
+              <h3>O que a plataforma deve se tornar</h3>
               <p>
-                A dependable operating layer for autonomous cyber defense across teams,
-                workloads and environments.
+                Uma camada operacional confiável para defesa cibernética autônoma entre equipes,
+                cargas de trabalho e ambientes.
               </p>
               <ul class="principles">
                 <li>
-                  <strong>Operational clarity</strong>
-                  One control plane for signals, decisions and outcomes.
+                  <strong>Clareza operacional</strong>
+                  Um plano de controle para sinais, decisões e resultados.
                 </li>
                 <li>
-                  <strong>Technical trust</strong>
-                  Transparent architecture that welcomes review and contribution.
+                  <strong>Confiança técnica</strong>
+                  Arquitetura transparente que incentiva revisão e contribuição.
                 </li>
                 <li>
-                  <strong>Incremental adoption</strong>
-                  Start small, validate quickly and scale with confidence.
+                  <strong>Adoção incremental</strong>
+                  Comece pequeno, valide rápido e escale com confiança.
                 </li>
               </ul>
             </article>
@@ -818,30 +853,65 @@
       <section id="support">
         <div class="shell">
           <div class="section-heading">
-            <h2>Support Sentinel OS</h2>
+            <h2>Apoie o Desenvolvimento do Sentinel OS</h2>
             <p>
-              Help the project grow through review, implementation, testing, documentation and
-              long-term operational feedback.
+              O Sentinel OS é um projeto de código aberto em desenvolvimento contínuo.
+              Apoios técnicos e institucionais ajudam a acelerar pesquisa e desenvolvimento,
+              infraestrutura Azure, ambientes de teste, integrações de segurança, evolução da
+              plataforma e infraestrutura de desenvolvimento.
             </p>
           </div>
           <div class="support-panel">
             <p>
-              The fastest way to support the project is to use it, inspect it and improve it
-              with concrete technical contributions.
+              A forma mais útil de apoiar o projeto é acompanhar sua evolução, revisar sua
+              arquitetura e contribuir com melhorias técnicas concretas.
             </p>
             <div class="support-grid">
               <article class="support-item">
-                <h4>Review the architecture</h4>
-                <p>Check the control plane, boundaries and workflows for gaps, risks and simplification opportunities.</p>
+                <h4>Pesquisa e desenvolvimento</h4>
+                <p>Contribuições que ajudam a validar hipóteses, evoluir funcionalidades e amadurecer a base técnica.</p>
               </article>
               <article class="support-item">
-                <h4>Contribute code</h4>
-                <p>Improve frontend, backend, agents and documentation with focused, reviewable changes.</p>
+                <h4>Infraestrutura Azure</h4>
+                <p>Recursos que sustentam ambientes, serviços e integrações hospedadas na nuvem.</p>
               </article>
               <article class="support-item">
-                <h4>Share operational feedback</h4>
-                <p>Report what works in real environments so the platform can mature with practical constraints in mind.</p>
+                <h4>Ambientes de teste</h4>
+                <p>Suporte para validar agentes autônomos, fluxos controlados e cenários de integração.</p>
               </article>
+              <article class="support-item">
+                <h4>Integrações de segurança</h4>
+                <p>Capacidade para conectar controles, verificações e sinais de segurança ao ecossistema do projeto.</p>
+              </article>
+              <article class="support-item">
+                <h4>Evolução da plataforma</h4>
+                <p>Tempo e infraestrutura para refinar a arquitetura, melhorar a estabilidade e ampliar o alcance do sistema.</p>
+              </article>
+              <article class="support-item">
+                <h4>Infraestrutura de desenvolvimento</h4>
+                <p>Ambiente para compilações, experimentos, automações e ciclos de entrega mais consistentes.</p>
+              </article>
+            </div>
+            <div class="support-goals">
+              <h3>Metas Atuais do Projeto</h3>
+              <div class="goal-grid">
+                <article class="goal-item">
+                  <h4>Expansão da infraestrutura Azure</h4>
+                  <p>Ampliar a base de serviços, automações e capacidades operacionais da plataforma.</p>
+                </article>
+                <article class="goal-item">
+                  <h4>Ambientes de teste para agentes autônomos</h4>
+                  <p>Disponibilizar cenários mais seguros para validação funcional e observação de comportamento.</p>
+                </article>
+                <article class="goal-item">
+                  <h4>Plataforma AM5</h4>
+                  <p>Acelerar compilações, testes e integrações com uma infraestrutura de desenvolvimento mais eficiente.</p>
+                </article>
+                <article class="goal-item">
+                  <h4>Evolução da arquitetura multiagente</h4>
+                  <p>Refinar coordenação, responsabilidades e integração entre agentes especializados.</p>
+                </article>
+              </div>
             </div>
           </div>
         </div>
@@ -852,20 +922,20 @@
           <div class="section-heading">
             <h2>Recursos para operar com clareza e controle.</h2>
             <p>
-              O Sentinel OS organiza componentes tecnicos em fluxos auditaveis,
-              preparados para evoluir de prototipo a operacao real.
+              O Sentinel OS organiza componentes técnicos em fluxos auditáveis,
+              preparados para evoluir de protótipo a operação real.
             </p>
           </div>
           <div class="feature-grid">
             <article class="feature-card">
               <div class="icon">01</div>
-              <h3>Orquestracao de agentes</h3>
-              <p>Coordene agentes especializados para desenvolvimento, revisao, seguranca e operacoes.</p>
+              <h3>Orquestração de agentes</h3>
+              <p>Coordene agentes especializados para desenvolvimento, revisão, segurança e operações.</p>
             </article>
             <article class="feature-card">
               <div class="icon">02</div>
               <h3>API modular</h3>
-              <p>Exponha capacidades internas por contratos simples, versionaveis e faceis de integrar.</p>
+              <p>Exponha capacidades internas por contratos simples, versionáveis e fáceis de integrar.</p>
             </article>
             <article class="feature-card">
               <div class="icon">03</div>
@@ -874,8 +944,8 @@
             </article>
             <article class="feature-card">
               <div class="icon">04</div>
-              <h3>Postura de seguranca</h3>
-              <p>Centralize rotinas defensivas e verificacoes continuas como parte do fluxo operacional.</p>
+              <h3>Postura de segurança</h3>
+              <p>Centralize rotinas defensivas e verificações contínuas como parte do fluxo operacional.</p>
             </article>
           </div>
         </div>
@@ -884,33 +954,33 @@
       <section id="architecture" class="architecture">
         <div class="shell">
           <div class="section-heading">
-            <h2>Arquitetura pensada para extensao progressiva.</h2>
+            <h2>Arquitetura pensada para extensão progressiva.</h2>
             <p>
-              Camadas separadas ajudam a manter automacoes, interfaces e controles internos
-              evoluindo sem acoplamento desnecessario.
+              Camadas separadas ajudam a manter automações, interfaces e controles internos
+              evoluindo sem acoplamento desnecessário.
             </p>
           </div>
           <div class="architecture-grid">
             <div class="layer-list">
               <article class="layer">
                 <small>Interface</small>
-                <h3>Frontend institucional e operacional</h3>
-                <p>Superficies para apresentacao, paineis e interacao com fluxos automatizados.</p>
+                <h3>Interface institucional e operacional</h3>
+                <p>Superfícies para apresentação, painéis e interação com fluxos automatizados.</p>
               </article>
               <article class="layer">
-                <small>Backend</small>
-                <h3>API e servicos internos</h3>
-                <p>Camada de entrada para comandos, consultas, integracoes e processos assincronos.</p>
+                <small>Retaguarda</small>
+                <h3>API e serviços internos</h3>
+                <p>Camada de entrada para comandos, consultas, integrações e processos assíncronos.</p>
               </article>
               <article class="layer">
-                <small>Agents</small>
+                <small>Agentes</small>
                 <h3>Especialistas coordenados</h3>
-                <p>Agentes com responsabilidades claras para execucao, revisao e protecao do ambiente.</p>
+                <p>Agentes com responsabilidades claras para execução, revisão e proteção do ambiente.</p>
               </article>
               <article class="layer">
-                <small>Core</small>
-                <h3>Politicas e configuracao</h3>
-                <p>Configuracoes centrais para manter comportamento previsivel entre componentes.</p>
+                <small>Núcleo</small>
+                <h3>Políticas e configuração</h3>
+                <p>Configurações centrais para manter comportamento previsível entre componentes.</p>
               </article>
             </div>
             <div class="diagram" aria-label="Diagrama da arquitetura Sentinel OS">
@@ -932,22 +1002,22 @@
                 </g>
                 <g>
                   <rect x="254" y="32" width="212" height="60" rx="8" fill="url(#box)" stroke="#345063" />
-                  <text x="360" y="68" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Frontend</text>
+                  <text x="360" y="68" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Interface</text>
 
                   <rect x="246" y="134" width="228" height="62" rx="8" fill="#112b2a" stroke="#38d6ae" />
-                  <text x="360" y="171" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Control Plane</text>
+                  <text x="360" y="171" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Plano de controle</text>
 
                   <rect x="254" y="238" width="212" height="62" rx="8" fill="url(#box)" stroke="#345063" />
-                  <text x="360" y="275" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Backend API</text>
+                  <text x="360" y="275" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">API de retaguarda</text>
 
                   <rect x="254" y="342" width="212" height="62" rx="8" fill="url(#box)" stroke="#345063" />
-                  <text x="360" y="379" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Core Config</text>
+                  <text x="360" y="379" text-anchor="middle" fill="#f4f7fb" font-size="18" font-family="Arial">Configuração central</text>
 
                   <rect x="50" y="198" width="150" height="64" rx="8" fill="#172332" stroke="#345063" />
-                  <text x="125" y="236" text-anchor="middle" fill="#f4f7fb" font-size="17" font-family="Arial">Agents</text>
+                  <text x="125" y="236" text-anchor="middle" fill="#f4f7fb" font-size="17" font-family="Arial">Agentes</text>
 
                   <rect x="520" y="198" width="150" height="64" rx="8" fill="#172332" stroke="#345063" />
-                  <text x="595" y="236" text-anchor="middle" fill="#f4f7fb" font-size="17" font-family="Arial">Security</text>
+                  <text x="595" y="236" text-anchor="middle" fill="#f4f7fb" font-size="17" font-family="Arial">Segurança</text>
                 </g>
               </svg>
             </div>
@@ -958,28 +1028,28 @@
       <section id="roadmap">
         <div class="shell">
           <div class="section-heading">
-            <h2>Roadmap orientado a maturidade operacional.</h2>
+            <h2>Roteiro orientado à maturidade operacional.</h2>
             <p>
-              A evolucao prioriza estabilidade, integracao e governanca antes de expandir
-              automacoes mais sensiveis.
+              A evolução prioriza estabilidade, integração e governança antes de expandir
+              automações mais sensíveis.
             </p>
           </div>
           <div class="roadmap-grid">
             <article class="roadmap-item">
-              <h3>Fundacao</h3>
-              <p>Consolidar estrutura do projeto, rotas essenciais, landing institucional e base de agentes.</p>
+              <h3>Fundação</h3>
+              <p>Consolidar a estrutura do projeto, rotas essenciais, landing institucional e base de agentes.</p>
             </article>
             <article class="roadmap-item">
-              <h3>Operacao assistida</h3>
-              <p>Adicionar paineis, logs e controles para acompanhar execucoes e estados do sistema.</p>
+              <h3>Operação assistida</h3>
+              <p>Adicionar painéis, logs e controles para acompanhar execuções e estados do sistema.</p>
             </article>
             <article class="roadmap-item">
-              <h3>Seguranca continua</h3>
-              <p>Integrar verificacoes recorrentes, trilhas de auditoria e politicas de execucao.</p>
+              <h3>Segurança contínua</h3>
+              <p>Integrar verificações recorrentes, trilhas de auditoria e políticas de execução.</p>
             </article>
             <article class="roadmap-item">
               <h3>Ecossistema</h3>
-              <p>Preparar extensoes, conectores e documentacao para colaboracao externa.</p>
+              <p>Preparar extensões, conectores e documentação para colaboração externa.</p>
             </article>
           </div>
         </div>
@@ -988,10 +1058,10 @@
       <section id="github">
         <div class="shell">
           <div class="github-band">
-            <h2>Open for evolution, review and technical contribution.</h2>
+            <h2>Aberto para evolução, revisão e contribuição técnica.</h2>
             <p>
-              Follow the development, review the architecture and contribute improvements
-              that make Sentinel OS more robust, observable and easier to operate.
+              Acompanhe o desenvolvimento, revise a arquitetura e contribua com melhorias
+              que tornem o Sentinel OS mais robusto, observável e fácil de operar.
             </p>
             <div class="github-actions">
               <a class="button primary" href="https://github.com/Regisbm1986/Sentinel-OS-2.0" target="_blank" rel="noreferrer">Abrir GitHub</a>
@@ -1005,7 +1075,7 @@
     <footer class="footer">
       <div class="shell footer-row">
         <span>Sentinel OS</span>
-        <span>Plataforma institucional para automacao, seguranca e operacoes.</span>
+        <span>Plataforma institucional para automação, segurança e operações.</span>
       </div>
     </footer>
   </div>
