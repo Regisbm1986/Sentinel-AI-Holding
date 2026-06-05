@@ -1,4 +1,6 @@
-# Sentinel OS
+# Sentinel OS              Website: https://www.sentinel-os.ia.br
+
+Contato:contato@sentinel-os.ia.br
 
 <p align="center">
   <img src="docs/banner.png" alt="Sentinel OS Banner">
