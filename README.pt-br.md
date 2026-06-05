@@ -1,4 +1,6 @@
-# Sentinel OS
+# Sentinel OS        Website:   https://www.sentinel-os.ia.br
+
+Contato:  contato@sentinel-os.ia.br
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
 ![Azure](https://img.shields.io/badge/Azure-Cloud-blue?style=for-the-badge&logo=microsoftazure)
