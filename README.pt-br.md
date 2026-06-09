@@ -75,28 +75,68 @@ O Sentinel OS prioriza:
 
 ---
 
-# Arquitetura Atual
+## Arquitetura Atual
 
-```text id="gfkk4w"
-frontend/
-└── streamlit/
-    └── app.py
+O Sentinel OS possui atualmente uma pipeline funcional de orquestração autônoma capaz de despachar tarefas, selecionar workers ativos, executar atividades e persistir o estado operacional do sistema.
 
-backend/
-└── modules/
-    ├── nikto/
-    ├── spiderfoot/
-    ├── john/
-    ├── enum4linux/
-    ├── kubehunter/
-    └── dagda/
+### Componentes Principais
 
-core/
-├── events/
-├── orchestration/
-├── telemetry/
-└── ai/
-```
+* WorkflowStateManager
+* TaskExecutor
+* TaskHistory
+* AgentMemory
+* RemoteWorkerManager
+* WorkerHeartbeat
+* WorkerSelector
+* WorkerDispatcher
+* WorkerExecutor
+* TaskResultManager
+* Orchestrator
+
+### Fluxo Atual
+
+Tarefa
+→ Orchestrator
+→ WorkflowStateManager
+→ WorkerDispatcher
+→ WorkerSelector
+→ WorkerHeartbeat
+→ WorkerExecutor
+→ TaskResultManager
+→ TaskHistory
+→ AgentMemory
+
+### Capacidades Atuais
+
+* Registro de workers
+* Monitoramento de saúde dos workers (heartbeat)
+* Seleção automática de workers ativos
+* Despacho de tarefas
+* Rastreamento de estado do workflow
+* Persistência de resultados
+* Persistência de histórico
+* Persistência de memória dos agentes
+* Pipeline completa de orquestração ponta a ponta
+
+### Marco Atual
+
+**v0.4.0-first-workflow**
+
+A primeira pipeline completa de orquestração está operacional, incluindo execução de tarefas, seleção de workers, rastreamento de workflow, persistência de memória e armazenamento de histórico de eventos.
+
+### Próximo Marco
+
+**WorkerExecutor v2**
+
+Capacidades planejadas:
+
+* Criar arquivos
+* Ler arquivos
+* Executar comandos
+* Suportar tarefas operacionais reais
+
+Este marco fará a transição do Sentinel OS de uma execução simulada para uma execução operacional real.
+
 
 ---
 
