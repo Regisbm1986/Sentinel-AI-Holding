@@ -78,28 +78,68 @@ Sentinel OS prioritizes:
 
 ---
 
-# Current Architecture
+## Current Architecture
 
-```text
-frontend/
-└── streamlit/
-    └── app.py
+Sentinel OS currently includes a functional autonomous orchestration pipeline capable of dispatching tasks, selecting active workers, executing jobs and persisting operational state.
 
-backend/
-└── modules/
-    ├── nikto/
-    ├── spiderfoot/
-    ├── john/
-    ├── enum4linux/
-    ├── kubehunter/
-    └── dagda/
+### Core Components
 
-core/
-├── events/
-├── orchestration/
-├── telemetry/
-└── ai/
-```
+* WorkflowStateManager
+* TaskExecutor
+* TaskHistory
+* AgentMemory
+* RemoteWorkerManager
+* WorkerHeartbeat
+* WorkerSelector
+* WorkerDispatcher
+* WorkerExecutor
+* TaskResultManager
+* Orchestrator
+
+### Current Workflow
+
+Task
+→ Orchestrator
+→ WorkflowStateManager
+→ WorkerDispatcher
+→ WorkerSelector
+→ WorkerHeartbeat
+→ WorkerExecutor
+→ TaskResultManager
+→ TaskHistory
+→ AgentMemory
+
+### Current Capabilities
+
+* Worker registration
+* Worker health monitoring
+* Worker selection
+* Task dispatching
+* Workflow state tracking
+* Result persistence
+* Task history persistence
+* Agent memory persistence
+* End-to-end orchestration pipeline
+
+### Current Milestone
+
+**v0.4.0-first-workflow**
+
+The first complete orchestration workflow is operational, including task execution, worker selection, workflow tracking, memory persistence and historical event storage.
+
+### Next Milestone
+
+**WorkerExecutor v2**
+
+Planned capabilities:
+
+* Create files
+* Read files
+* Execute commands
+* Support real operational tasks
+
+This milestone will transition Sentinel OS from simulated execution to real-world task execution.
+
 
 ---
 
@@ -211,9 +251,12 @@ The project is being designed as an operational ecosystem focused on intelligent
 
 ---
 
-# Status
+# Project Status
 
-Active Development
+Infrastructure: Complete
+Orchestration: Functional
+Autonomous Execution: In Development
+Multi-Agent Development Workers: Planned
 
 ---
 
