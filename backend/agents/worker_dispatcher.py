@@ -1,28 +1,14 @@
-from backend.agents.remote_worker_manager import RemoteWorkerManager
+from backend.agents.worker_selector import WorkerSelector
 
 
 class WorkerDispatcher:
-
     def __init__(self):
-
-        self.worker_manager = RemoteWorkerManager()
-
-    def get_available_worker(self):
-
-        workers = self.worker_manager.get_workers()
-
-        if not workers:
-
-            return None
-
-        return workers[0]
+        self.selector = WorkerSelector()
 
     def dispatch(self, task_id):
+        worker_id = self.selector.get_available_worker()
 
-        worker_id = self.get_available_worker()
-
-        if worker_id is None:
-
+        if not worker_id:
             return {
                 "status": "no_workers"
             }
