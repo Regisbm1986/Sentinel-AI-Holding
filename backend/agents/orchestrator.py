@@ -3,7 +3,7 @@ from backend.agents.worker_executor import WorkerExecutor
 from backend.agents.agent_memory import AgentMemory
 from backend.agents.task_history import TaskHistory
 from backend.agents.workflow_state_manager import WorkflowStateManager
-
+from backend.agents.task_queue import TaskQueue
 
 class Orchestrator:
     def __init__(self):
@@ -12,6 +12,19 @@ class Orchestrator:
         self.memory = AgentMemory()
         self.history = TaskHistory()
         self.workflow = WorkflowStateManager()
+        self.queue = TaskQueue()
+
+    def process_queue(self):
+
+        task = self.queue.get_next_task()
+
+        if not task:
+
+            return {
+                "status": "empty_queue"
+            }
+
+        return self.run_task(task)
 
     def run_task(self, task):
 
