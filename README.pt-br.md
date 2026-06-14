@@ -120,16 +120,16 @@ Tarefa
 
 ### Marco Atual
 
-v0.4.0-first-workflow                    ✅
-v0.5.0-real-execution                    ✅
-v0.5.1-orchestrated-real-execution       ✅
+#v0.4.0-first-workflow                    ✅
+#v0.5.0-real-execution                    ✅
+#v0.5.1-orchestrated-real-execution       ✅
 
-v0.6.0-task-queue                        ⏳
-v0.7.0-developer-worker                  ⏳
-v0.8.0-codex-integration                 ⏳
-v0.9.0-autonomous-development            ⏳
+#v0.6.0-task-queue                        ⏳
+#v0.7.0-developer-worker                  ⏳
+#v0.8.0-codex-integration                 ⏳
+#v0.9.0-autonomous-development            ⏳
 
-v1.0.0-sentinel-launch
+#v1.0.0-sentinel-launch
 
 
 ---
