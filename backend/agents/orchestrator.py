@@ -13,46 +13,48 @@ class Orchestrator:
         self.history = TaskHistory()
         self.workflow = WorkflowStateManager()
 
-    def run_task(self, task_id):
+    def run_task(self, task):
+
+        task_key = str(task)
 
         self.workflow.set_state(
-            task_id,
+            task_key,
             "planned"
         )
 
-        dispatch = self.dispatcher.dispatch(task_id)
+        dispatch = self.dispatcher.dispatch(task)
 
         if dispatch["status"] != "dispatched":
 
             self.workflow.set_state(
-                task_id,
+                task_key,
                 "failed"
             )
 
             return dispatch
 
         self.workflow.set_state(
-            task_id,
+            task_key,
             "dispatched"
         )
 
         self.workflow.set_state(
-            task_id,
+            task_key,
             "running"
         )
 
         result = self.executor.execute(
             dispatch["worker_id"],
-            task_id
+            task
         )
 
         self.workflow.set_state(
-            task_id,
+            task_key,
             "completed"
         )
 
         self.history.log_event(
-            task_id,
+            task_key,
             {
                 "status": "completed",
                 "worker_id": dispatch["worker_id"]
@@ -61,7 +63,7 @@ class Orchestrator:
 
         self.memory.remember(
             {
-                "task_id": task_id,
+                "task_id": task_key,
                 "result": result
             }
         )
