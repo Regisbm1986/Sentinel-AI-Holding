@@ -123,25 +123,16 @@ Task
 
 ### Current Milestone
 
-**v0.4.0-first-workflow**
+*v0.4.0-first-workflow                    ✅
+v0.5.0-real-execution                    ✅
+v0.5.1-orchestrated-real-execution       ✅
 
-The first complete orchestration workflow is operational, including task execution, worker selection, workflow tracking, memory persistence and historical event storage.
+v0.6.0-task-queue                        ⏳
+v0.7.0-developer-worker                  ⏳
+v0.8.0-codex-integration                 ⏳
+v0.9.0-autonomous-development            ⏳
 
-### Next Milestone
-
-**WorkerExecutor v2**
-
-Planned capabilities:
-
-* Create files
-* Read files
-* Execute commands
-* Support real operational tasks
-
-This milestone will transition Sentinel OS from simulated execution to real-world task execution.
-
-
----
+v1.0.0-sentinel-launch
 
 # Platform Objectives
 
