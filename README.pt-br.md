@@ -120,22 +120,16 @@ Tarefa
 
 ### Marco Atual
 
-**v0.4.0-first-workflow**
+v0.4.0-first-workflow                    ✅
+v0.5.0-real-execution                    ✅
+v0.5.1-orchestrated-real-execution       ✅
 
-A primeira pipeline completa de orquestração está operacional, incluindo execução de tarefas, seleção de workers, rastreamento de workflow, persistência de memória e armazenamento de histórico de eventos.
+v0.6.0-task-queue                        ⏳
+v0.7.0-developer-worker                  ⏳
+v0.8.0-codex-integration                 ⏳
+v0.9.0-autonomous-development            ⏳
 
-### Próximo Marco
-
-**WorkerExecutor v2**
-
-Capacidades planejadas:
-
-* Criar arquivos
-* Ler arquivos
-* Executar comandos
-* Suportar tarefas operacionais reais
-
-Este marco fará a transição do Sentinel OS de uma execução simulada para uma execução operacional real.
+v1.0.0-sentinel-launch
 
 
 ---
