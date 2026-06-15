@@ -12,6 +12,10 @@ class GoalPlanner:
         r"^Run the command:\s*(?P<command>.+)$",
         re.IGNORECASE,
     )
+    API_ROUTE_PATTERN = re.compile(
+        r"^Create API route for module\s+'(?P<module>[^']+)'\s+in\s+(?P<path>.+)$",
+        re.IGNORECASE,
+    )
 
     def plan(self, goal):
         text = goal.strip()
@@ -33,6 +37,26 @@ class GoalPlanner:
                 {
                     "type": "command",
                     "command": command_match.group("command").strip(),
+                    "goal": text,
+                }
+            ]
+
+        api_route_match = self.API_ROUTE_PATTERN.match(text)
+        if api_route_match:
+            module = api_route_match.group("module")
+            path = api_route_match.group("path").strip()
+            content = (
+                "from fastapi import APIRouter\n\n"
+                "router = APIRouter()\n\n"
+                "@router.get(\"/\")\n"
+                "def health():\n"
+                f'    return {{"module": "{module}", "status": "ok"}}\n'
+            )
+            return [
+                {
+                    "type": "create_file",
+                    "path": path,
+                    "content": content,
                     "goal": text,
                 }
             ]

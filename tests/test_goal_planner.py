@@ -28,3 +28,24 @@ def test_goal_planner_creates_command_task_for_shell_goals():
             "goal": "Run the command: ls -la",
         }
     ]
+
+
+def test_goal_planner_generates_fastapi_route_template():
+    planner = GoalPlanner()
+
+    tasks = planner.plan("Create API route for module 'beef' in backend/api/routes/beef.py")
+
+    assert tasks == [
+        {
+            "type": "create_file",
+            "path": "backend/api/routes/beef.py",
+            "content": (
+                "from fastapi import APIRouter\n\n"
+                "router = APIRouter()\n\n"
+                '@router.get("/")\n'
+                "def health():\n"
+                '    return {"module": "beef", "status": "ok"}\n'
+            ),
+            "goal": "Create API route for module 'beef' in backend/api/routes/beef.py",
+        }
+    ]
