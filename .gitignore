@@ -44,3 +44,8 @@ htmlcov/
 # Docker
 docker-compose.override.yml
 ```
+# Sentinel Runtime State
+backend/agents/tasks/*.json
+
+# Keep directory structure
+!backend/agents/tasks/.gitkeep
