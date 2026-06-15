@@ -77,3 +77,25 @@ class TaskQueue:
         self._save(queue)
 
         return task
+
+    def peek_next_task(self):
+
+        queue = self._load()
+
+        if not queue:
+            return None
+
+        return queue[0]
+
+    def remove_next_task(self):
+
+        queue = self._load()
+
+        if not queue:
+            return None
+
+        task = queue.pop(0)
+
+        self._save(queue)
+
+        return task

@@ -16,7 +16,7 @@ class Orchestrator:
 
     def process_queue(self):
 
-        task = self.queue.get_next_task()
+        task = self.queue.peek_next_task()
 
         if not task:
 
@@ -24,7 +24,17 @@ class Orchestrator:
                 "status": "empty_queue"
             }
 
-        return self.run_task(task)
+        result = self.run_task(task)
+
+        if result.get("status") not in [
+            "failed",
+            "no_workers"
+        ]:
+
+
+           self.queue.remove_next_task()
+
+        return result
 
     def run_task(self, task):
 
