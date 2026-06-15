@@ -1,9 +1,11 @@
+import importlib
+from pathlib import Path
+
 from fastapi import FastAPI
 
-from backend.api.routes.enum4linux import router as enum4linux_router
-from backend.api.routes.nikto import router as nikto_router
-from backend.api.routes.spiderfoot import router as spiderfoot_router
-from backend.api.routes.system import router as system_router
+
+ROUTES_DIR = Path(__file__).resolve().parent / "routes"
+MODULE_PREFIX = "backend.api.routes"
 
 
 app = FastAPI(
@@ -28,10 +30,21 @@ def health():
     }
 
 
-for api_router in (
-    nikto_router,
-    spiderfoot_router,
-    enum4linux_router,
-    system_router,
-):
-    app.include_router(api_router, prefix="/api")
+
+
+def register_routes(app, routes_dir=ROUTES_DIR, module_prefix=MODULE_PREFIX):
+    for route_file in sorted(routes_dir.glob("*.py")):
+        if route_file.name.startswith("__") or route_file.name == "main.py":
+            continue
+
+        module_name = f"{module_prefix}.{route_file.stem}"
+        module = importlib.import_module(module_name)
+        router = getattr(module, "router", None)
+
+        if router is not None:
+            app.include_router(router, prefix="/api")
+
+    return app
+
+
+register_routes(app)
