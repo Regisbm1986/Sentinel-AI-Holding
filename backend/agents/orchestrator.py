@@ -1,18 +1,22 @@
+from datetime import datetime, timezone
+
 from backend.agents.worker_dispatcher import WorkerDispatcher
 from backend.agents.worker_executor import WorkerExecutor
 from backend.agents.agent_memory import AgentMemory
 from backend.agents.task_history import TaskHistory
 from backend.agents.workflow_state_manager import WorkflowStateManager
 from backend.agents.task_queue import TaskQueue
+from backend.telemetry.execution_telemetry import ExecutionTelemetry
 
 class Orchestrator:
-    def __init__(self):
+    def __init__(self, telemetry=None):
         self.dispatcher = WorkerDispatcher()
         self.executor = WorkerExecutor()
         self.memory = AgentMemory()
         self.history = TaskHistory()
         self.workflow = WorkflowStateManager()
         self.queue = TaskQueue()
+        self.telemetry = telemetry or ExecutionTelemetry()
 
     def process_queue(self):
 
@@ -66,23 +70,69 @@ class Orchestrator:
             "running"
         )
 
-        result = self.executor.execute(
-            dispatch["worker_id"],
-            task
+        goal = task.get("goal") if isinstance(task, dict) else str(task)
+        start_time = datetime.now(timezone.utc).isoformat()
+
+        self.telemetry.log_execution(
+            goal=goal,
+            task=task,
+            worker=dispatch["worker_id"],
+            start_time=start_time,
+            end_time="",
+            status="running"
         )
 
-        self.workflow.set_state(
-            task_key,
-            "completed"
-        )
-
-        self.history.log_event(
-            task_key,
-            {
-                "status": "completed",
-                "worker_id": dispatch["worker_id"]
+        try:
+            result = self.executor.execute(
+                dispatch["worker_id"],
+                task
+            )
+        except Exception as exc:
+            result = {
+                "status": "failed",
+                "error": str(exc),
+                "exception_type": exc.__class__.__name__,
             }
+
+        end_time = datetime.now(timezone.utc).isoformat()
+        status = result.get("status", "completed") if isinstance(result, dict) else "completed"
+
+        self.telemetry.log_execution(
+            goal=goal,
+            task=task,
+            worker=dispatch["worker_id"],
+            start_time=start_time,
+            end_time=end_time,
+            status=status
         )
+
+        if status == "completed":
+            self.workflow.set_state(
+                task_key,
+                "completed"
+            )
+
+            self.history.log_event(
+                task_key,
+                {
+                    "status": "completed",
+                    "worker_id": dispatch["worker_id"]
+                }
+            )
+        else:
+            self.workflow.set_state(
+                task_key,
+                "failed"
+            )
+
+            self.history.log_event(
+                task_key,
+                {
+                    "status": "failed",
+                    "worker_id": dispatch["worker_id"],
+                    "error": result.get("error")
+                }
+            )
 
         self.memory.remember(
             {

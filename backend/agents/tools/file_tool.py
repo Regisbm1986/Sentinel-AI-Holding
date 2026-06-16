@@ -12,6 +12,14 @@ class FileTool:
             exist_ok=True
         )
 
+        if file_path.exists():
+            return {
+                "status": "failed",
+                "action": "create_file",
+                "path": str(file_path),
+                "error": "file already exists"
+            }
+
         file_path.write_text(
             content,
             encoding="utf-8"

@@ -49,3 +49,45 @@ def test_goal_planner_generates_fastapi_route_template():
             "goal": "Create API route for module 'beef' in backend/api/routes/beef.py",
         }
     ]
+
+
+def test_goal_planner_rejects_empty_goal():
+    planner = GoalPlanner()
+
+    try:
+        planner.plan("")
+        assert False, "Expected ValueError for empty goal"
+    except ValueError as exc:
+        assert str(exc) == "Goal cannot be empty"
+
+
+def test_goal_planner_rejects_duplicate_goal():
+    planner = GoalPlanner()
+
+    planner.plan("Run the command: echo hello")
+
+    try:
+        planner.plan("Run the command: echo hello")
+        assert False, "Expected ValueError for duplicate goal"
+    except ValueError as exc:
+        assert str(exc) == "Duplicate goal"
+
+
+def test_goal_planner_rejects_dangerous_file_path():
+    planner = GoalPlanner()
+
+    try:
+        planner.plan("Create a file at ../secret.txt with content secret")
+        assert False, "Expected ValueError for dangerous file path"
+    except ValueError as exc:
+        assert str(exc) == "Goal contains a dangerous file path"
+
+
+def test_goal_planner_rejects_unsupported_goal_format():
+    planner = GoalPlanner()
+
+    try:
+        planner.plan("Do something unexpected")
+        assert False, "Expected ValueError for unsupported goal format"
+    except ValueError as exc:
+        assert str(exc) == "Unsupported goal format"

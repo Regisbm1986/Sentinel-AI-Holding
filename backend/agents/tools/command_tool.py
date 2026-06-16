@@ -13,7 +13,7 @@ class CommandTool:
         )
 
         return {
-            "status": "completed",
+            "status": "completed" if result.returncode == 0 else "failed",
             "command": command,
             "stdout": result.stdout,
             "stderr": result.stderr,
