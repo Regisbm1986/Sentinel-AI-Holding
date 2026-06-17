@@ -251,7 +251,23 @@ O projeto está sendo desenvolvido como um ecossistema operacional focado em ope
 
 # Status
 
-Em desenvolvimento ativo.
+Estado atual
+
+- Painel de administração
+
+- Console de operações do usuário
+
+- Orquestração autônoma de tarefas
+
+- Gerenciamento de workers
+
+- Telemetria
+
+- Registro de capacidades
+
+- Descoberta automática de módulos
+
+- 55 testes automatizados aprovados
 
 ---
 
