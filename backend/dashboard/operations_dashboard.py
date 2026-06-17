@@ -4,6 +4,7 @@ from backend.agents.worker_selector import WorkerSelector
 from backend.core.config import PROJECT_ROOT
 from backend.database.capability_registry import CapabilityRegistry
 from backend.telemetry.execution_telemetry import ExecutionTelemetry
+from backend.platform.module_discovery import sync_capability_registry
 
 
 def load_goals(project_root=PROJECT_ROOT):
@@ -25,6 +26,7 @@ def load_telemetry(telemetry_factory=ExecutionTelemetry, limit=25):
 
 def load_capability_registry(registry_factory=CapabilityRegistry, status=None):
     registry = registry_factory()
+    sync_capability_registry(registry=registry)
     return registry.list_capabilities(status=status)
 
 
@@ -66,7 +68,9 @@ def build_dashboard_snapshot(
     queue_status = load_queue_status(task_queue_cls=task_queue_cls)
     workers = load_workers(worker_selector_cls=worker_selector_cls)
     telemetry = load_telemetry(telemetry_factory=telemetry_factory, limit=telemetry_limit)
-    capabilities = load_capability_registry(registry_factory=registry_factory)
+    registry = registry_factory()
+    sync_capability_registry(registry=registry)
+    capabilities = registry.list_capabilities()
     execution_status = derive_autonomous_execution_status(queue_status, telemetry)
 
     return {

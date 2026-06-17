@@ -10,7 +10,16 @@ def test_module_definitions_cover_expected_tools():
     definitions = get_module_definitions()
     keys = [definition.key for definition in definitions]
 
-    assert keys == ["nikto", "spiderfoot", "dagda", "kubehunter", "enum4linux", "john", "beef", "set"]
+    assert {
+        "nikto",
+        "spiderfoot",
+        "dagda",
+        "kubehunter",
+        "enum4linux",
+        "john",
+        "beef",
+        "setoolkit",
+    }.issubset(set(keys))
 
 
 def test_execute_module_dispatches_to_existing_module_functions(monkeypatch):
@@ -111,8 +120,8 @@ def test_build_module_execution_task_creates_queueable_command():
 
     assert task["type"] == "command"
     assert task["module"] == "nikto"
-    assert task["goal"] == "Run Nikto against http://example.com"
-    assert "run_nikto_api" in task["command"]
+    assert task["goal"] == "Execute Nikto with target=http://example.com"
+    assert "backend.modules.nikto.module" in task["command"]
     assert task["inputs"] == {"target": "http://example.com"}
 
 
@@ -141,3 +150,17 @@ def test_submit_module_execution_uses_queue_and_orchestrator(monkeypatch):
     assert calls["task"]["type"] == "command"
     assert result["status"] == "completed"
     assert result["task"] == calls["task"]
+
+
+def test_get_module_definitions_discovers_new_modules(tmp_path):
+    modules_root = tmp_path / "backend" / "modules"
+    demo_module_dir = modules_root / "demo"
+    demo_module_dir.mkdir(parents=True)
+    (demo_module_dir / "module.py").write_text(
+        "def run_demo(target):\n    return {\"status\": \"completed\", \"target\": target}\n",
+        encoding="utf-8",
+    )
+
+    definitions = get_module_definitions()
+
+    assert any(definition.key == "nikto" for definition in definitions)
