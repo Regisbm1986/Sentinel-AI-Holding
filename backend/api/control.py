@@ -2,6 +2,7 @@ from backend.agents.autonomous_developer import AutonomousDeveloper
 from backend.agents.orchestrator import Orchestrator
 from backend.agents.task_queue import TaskQueue
 from backend.agents.worker_selector import WorkerSelector
+from backend.platform.operations_platform import build_module_execution_task
 from backend.telemetry.execution_telemetry import ExecutionTelemetry
 from backend.core.config import PROJECT_ROOT
 
@@ -49,4 +50,26 @@ def get_goals(project_root=PROJECT_ROOT, developer_cls=AutonomousDeveloper):
     developer = developer_cls(project_root=project_root)
     return {
         "goals": developer.discover_goals(),
+    }
+
+
+def submit_module_execution(
+    module_key,
+    values,
+    task_builder=build_module_execution_task,
+    task_queue_cls=TaskQueue,
+    orchestrator_cls=Orchestrator,
+):
+    task = task_builder(module_key, values)
+
+    queue = task_queue_cls()
+    queue.add_task(task)
+
+    orchestrator = orchestrator_cls()
+    result = orchestrator.process_queue()
+
+    return {
+        "task": task,
+        "result": result,
+        "status": result.get("status"),
     }
