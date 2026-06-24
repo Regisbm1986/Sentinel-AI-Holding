@@ -17,6 +17,23 @@ Contato:  contato@sentinel-os.ia.br
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blue?style=for-the-badge&logo=kubernetes)
 
 
+## ❤️ Apoie o Sentinel OS
+
+O Sentinel OS é uma iniciativa open source independente focada em cibersegurança autônoma, observabilidade, conformidade e operações impulsionadas por Inteligência Artificial.
+
+Se você acredita no futuro da automação de segurança e infraestrutura, considere apoiar o projeto:
+
+👉 https://github.com/sponsors/Regisbm1986
+
+Seu apoio ajuda a financiar:
+
+- Infraestrutura Azure AI
+- Desenvolvimento de agentes autônomos
+- Pesquisa em automação de segurança
+- Novos módulos e integrações
+- Crescimento da comunidade open source
+
+
 ## Plataforma de Operações Cibernéticas Nativa em IA
 
 O Sentinel OS é um ecossistema de operações de segurança orientado por inteligência artificial, focado em:
