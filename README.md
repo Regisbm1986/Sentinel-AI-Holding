@@ -20,6 +20,23 @@ Contato:contato@sentinel-os.ia.br
 ![Docker](https://img.shields.io/badge/Docker-Containers-blue?style=for-the-badge&logo=docker)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blue?style=for-the-badge&logo=kubernetes)
 
+## ❤️ Support Sentinel OS
+
+Sentinel OS is an independent open-source initiative focused on autonomous cybersecurity, observability, compliance, and AI-driven operations.
+
+If you believe in the future of autonomous security platforms, consider supporting the project:
+
+👉 https://github.com/sponsors/Regisbm1986
+
+Your support helps fund:
+
+- Azure AI infrastructure
+- Autonomous agent development
+- Security automation research
+- New integrations and modules
+- Open-source community growth
+
+
 ## AI-Native Cyber Operations Platform
 
 Sentinel OS is an AI-driven security operations ecosystem focused on:
