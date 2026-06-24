@@ -56,3 +56,5 @@ backend/database/capabilities.json
 
 # Local backups
 *.bkp
+
+.continue/
