@@ -1,180 +1,199 @@
-from backend.api.control import get_autonomous_status, get_goals, get_telemetry, get_workers
-from backend.agents.task_queue import TaskQueue
-from backend.agents.worker_selector import WorkerSelector
-from backend.core.config import PROJECT_ROOT
-from backend.database.capability_registry import CapabilityRegistry
-from backend.telemetry.execution_telemetry import ExecutionTelemetry
-from backend.platform.module_discovery import sync_capability_registry
+"""Landing page for the Sentinel AI holding rendered via Streamlit."""
+
+from __future__ import annotations
+
+import streamlit as st
 
 
-def load_goals(project_root=PROJECT_ROOT):
-    return get_goals(project_root=project_root).get("goals", [])
-
-
-def load_queue_status(task_queue_cls=TaskQueue):
-    return get_autonomous_status(task_queue_cls=task_queue_cls)
-
-
-def load_workers(worker_selector_cls=WorkerSelector):
-    return get_workers(worker_selector_cls=worker_selector_cls).get("available_workers", [])
-
-
-def load_telemetry(telemetry_factory=ExecutionTelemetry, limit=25):
-    telemetry = telemetry_factory()
-    return telemetry.get_logs(limit=limit)
-
-
-def load_capability_registry(registry_factory=CapabilityRegistry, status=None):
-    registry = registry_factory()
-    sync_capability_registry(registry=registry)
-    return registry.list_capabilities(status=status)
-
-
-def derive_autonomous_execution_status(queue_status, telemetry_entries):
-    last_entry = telemetry_entries[-1] if telemetry_entries else None
-    queue_state = queue_status.get("queue_status", "unknown")
-
-    if last_entry and last_entry.get("status") == "running":
-        state = "running"
-    elif queue_state == "pending":
-        state = "queued"
-    elif last_entry and last_entry.get("status") == "failed":
-        state = "error"
-    elif queue_state == "empty":
-        state = "idle"
-    else:
-        state = "unknown"
-
-    return {
-        "state": state,
-        "queue_status": queue_state,
-        "next_task": queue_status.get("next_task"),
-        "last_status": last_entry.get("status") if last_entry else None,
-        "last_goal": last_entry.get("goal") if last_entry else None,
-        "last_worker": last_entry.get("worker") if last_entry else None,
-        "telemetry_entries": len(telemetry_entries),
+CYBER_CSS = """
+<style>
+    .stApp {
+        background-color: #030712;
+        background-image: radial-gradient(ellipse at top, rgba(0, 255, 102, 0.08), transparent 55%),
+                          radial-gradient(ellipse at bottom, rgba(0, 102, 255, 0.08), transparent 60%);
+        color: #e2e8f0;
+        font-family: "Inter", "Segoe UI", sans-serif;
     }
 
-
-def build_dashboard_snapshot(
-    project_root=PROJECT_ROOT,
-    task_queue_cls=TaskQueue,
-    worker_selector_cls=WorkerSelector,
-    telemetry_factory=ExecutionTelemetry,
-    registry_factory=CapabilityRegistry,
-    telemetry_limit=25,
-):
-    goals = load_goals(project_root=project_root)
-    queue_status = load_queue_status(task_queue_cls=task_queue_cls)
-    workers = load_workers(worker_selector_cls=worker_selector_cls)
-    telemetry = load_telemetry(telemetry_factory=telemetry_factory, limit=telemetry_limit)
-    registry = registry_factory()
-    sync_capability_registry(registry=registry)
-    capabilities = registry.list_capabilities()
-    execution_status = derive_autonomous_execution_status(queue_status, telemetry)
-
-    return {
-        "goals": goals,
-        "queue_status": queue_status,
-        "workers": workers,
-        "telemetry": telemetry,
-        "capabilities": capabilities,
-        "execution_status": execution_status,
+    .sentinel-container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 3rem 1.75rem 5rem;
     }
 
+    .sentinel-values {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.85rem;
+        margin: 3rem auto 4rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.35rem;
+        text-transform: uppercase;
+        """Landing page for the Sentinel AI holding rendered via Streamlit."""
 
-def render_dashboard(snapshot=None):
-    import streamlit as st
+        from __future__ import annotations
 
-    if snapshot is None:
-        snapshot = build_dashboard_snapshot(project_root=PROJECT_ROOT)
-
-    st.set_page_config(
-        page_title="Sentinel Operations Dashboard",
-        page_icon="🧭",
-        layout="wide",
-        initial_sidebar_state="expanded",
-    )
-
-    st.title("Sentinel Operations Dashboard")
-    st.caption("Read-only operational view backed by live Sentinel project data.")
-
-    goals = snapshot["goals"]
-    queue_status = snapshot["queue_status"]
-    workers = snapshot["workers"]
-    telemetry = snapshot["telemetry"]
-    capabilities = snapshot["capabilities"]
-    execution_status = snapshot["execution_status"]
-
-    metrics = st.columns(6)
-    metrics[0].metric("Goals", len(goals))
-    metrics[1].metric("Queue", queue_status.get("queue_status", "unknown"))
-    metrics[2].metric("Workers", len(workers))
-    metrics[3].metric("Telemetry", len(telemetry))
-    metrics[4].metric("Capabilities", len(capabilities))
-    metrics[5].metric("Autonomous Status", execution_status["state"])
-
-    tabs = st.tabs([
-        "Goals",
-        "Queue Status",
-        "Workers",
-        "Telemetry",
-        "Capability Registry",
-        "Autonomous Execution Status",
-    ])
-
-    with tabs[0]:
-        st.subheader("Goals")
-        if goals:
-            st.table([{ "goal": goal } for goal in goals])
-        else:
-            st.info("No goals discovered in the current project.")
-
-    with tabs[1]:
-        st.subheader("Queue Status")
-        st.metric("Queue State", queue_status.get("queue_status", "unknown"))
-        next_task = queue_status.get("next_task")
-        if next_task is not None:
-            st.json(next_task)
-        else:
-            st.info("No queued task is waiting for execution.")
-
-    with tabs[2]:
-        st.subheader("Workers")
-        if workers:
-            st.table([{ "worker": worker } for worker in workers])
-        else:
-            st.info("No available workers were reported by the worker selector.")
-
-    with tabs[3]:
-        st.subheader("Telemetry")
-        if telemetry:
-            st.table(telemetry)
-        else:
-            st.info("No telemetry entries have been recorded yet.")
-
-    with tabs[4]:
-        st.subheader("Capability Registry")
-        if capabilities:
-            st.table(capabilities)
-        else:
-            st.info("The capability registry is empty.")
-
-    with tabs[5]:
-        st.subheader("Autonomous Execution Status")
-        st.metric("State", execution_status["state"])
-        st.write({
-            "queue_status": execution_status["queue_status"],
-            "telemetry_entries": execution_status["telemetry_entries"],
-            "last_status": execution_status["last_status"],
-            "last_goal": execution_status["last_goal"],
-            "last_worker": execution_status["last_worker"],
-        })
+        import streamlit as st
 
 
-def main():
-    render_dashboard()
+        def render_dashboard() -> None:
+            """Render Sentinel AI landing with banner, values, and product cards."""
+
+            st.set_page_config(
+                page_title="Sentinel AI",
+                page_icon="🛡️",
+                layout="wide",
+                initial_sidebar_state="collapsed",
+            )
+
+            st.image(
+                "/home/sentineladmin/sentinel-os/sentinel-career-intelligence/SentinelAI.png",
+                use_container_width=True,
+            )
+
+            html = """
+            <style>
+                .stApp {
+                    background-color: #030712;
+                    background-image: radial-gradient(ellipse at top, rgba(0, 255, 102, 0.08), transparent 55%),
+                                      radial-gradient(ellipse at bottom, rgba(0, 102, 255, 0.08), transparent 60%);
+                    color: #e2e8f0;
+                    font-family: "Inter", "Segoe UI", sans-serif;
+                }
+
+                .sentinel-container {
+                    max-width: 1180px;
+                    margin: 0 auto;
+                    padding: 3rem 1.75rem 5rem;
+                }
+
+                .sentinel-values {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 0.85rem;
+                    margin: 3rem auto 4rem;
+                    font-size: 0.8rem;
+                    letter-spacing: 0.35rem;
+                    text-transform: uppercase;
+                    color: #a5b4fc;
+                }
+
+                .sentinel-values span {
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 999px;
+                    background: rgba(15, 23, 42, 0.65);
+                    border: 1px solid rgba(148, 163, 184, 0.25);
+                }
+
+                .sentinel-cards {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                    gap: 1.5rem;
+                    width: 100%;
+                }
+
+                .sentinel-card {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    padding: 2.25rem;
+                    border-radius: 1.75rem;
+                    border: 1px solid rgba(0, 255, 102, 0.28);
+                    background: rgba(3, 7, 18, 0.8);
+                    text-decoration: none;
+                    color: inherit;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+                    backdrop-filter: blur(8px);
+                }
+
+                .sentinel-card:hover {
+                    transform: translateY(-6px);
+                    border-color: rgba(0, 255, 102, 0.85);
+                    box-shadow: 0 18px 44px -16px rgba(0, 255, 102, 0.55);
+                }
+
+                .sentinel-card h3 {
+                    margin: 0;
+                    font-size: 1.35rem;
+                    color: #f8fafc;
+                    letter-spacing: 0.25rem;
+                    text-transform: uppercase;
+                }
+
+                .sentinel-card p {
+                    margin: 0;
+                    color: #cbd5f5;
+                    font-size: 0.98rem;
+                    line-height: 1.6;
+                }
+
+                .sentinel-card span.cta {
+                    margin-top: auto;
+                    font-size: 0.82rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.35rem;
+                    color: #00ff66;
+                }
+
+                .sentinel-footer {
+                    text-align: center;
+                    font-size: 0.82rem;
+                    letter-spacing: 0.3rem;
+                    text-transform: uppercase;
+                    color: #64748b;
+                    padding: 2rem 1.5rem 3rem;
+                    border-top: 1px solid rgba(148, 163, 184, 0.25);
+                    background: rgba(2, 6, 14, 0.7);
+                }
+
+                @media (max-width: 680px) {
+                    .sentinel-values {
+                        letter-spacing: 0.18rem;
+                    }
+                }
+            </style>
+
+            <div class="sentinel-container">
+                <div class="sentinel-values">
+                    <span>Inteligência Artificial</span>
+                    <span>Agentes Inteligentes</span>
+                    <span>Automação Inteligente</span>
+                    <span>Segurança e Privacidade</span>
+                    <span>Dados que geram valor</span>
+                </div>
+
+                <div class="sentinel-cards">
+                    <a class="sentinel-card" href="http://localhost:3000" target="_blank" rel="noopener noreferrer">
+                        <h3>SENTINEL CAREER</h3>
+                        <p>Sua carreira, potencializada por IA.</p>
+                        <span class="cta">Explorar</span>
+                    </a>
+                    <a class="sentinel-card" href="https://sentinel.ia.br/home" target="_blank" rel="noopener noreferrer">
+                        <h3>SENTINEL HOME</h3>
+                        <p>Sua casa inteligente, simplificada.</p>
+                        <span class="cta">Conhecer</span>
+                    </a>
+                    <a class="sentinel-card" href="https://sentinel.ia.br/os" target="_blank" rel="noopener noreferrer">
+                        <h3>SENTINEL OS</h3>
+                        <p>Um sistema operacional inteligente para o seu dia a dia.</p>
+                        <span class="cta">Descobrir</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sentinel-footer">
+                Construindo o futuro com inteligência, inovação e propósito. www.sentinel.ia.br
+            </div>
+            """
+
+            st.markdown(html, unsafe_allow_html=True)
 
 
-if __name__ == "__main__":
-    main()
+        def main() -> None:
+            render_dashboard()
+
+
+        if __name__ == "__main__":
+            main()
