@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <img src="Sentinel-AI-Holding/docs/ChatGPT Image 31 de jul. de 2026, 17_36_16.png" alt="Sentinel AI Logo" width="600">
+  <img src="./docs/sentinel-ai-logo.png" alt="Sentinel AI Logo" width="600">
 
   <h3>Intelligent Autonomous Ecosystem & SaaS Holding</h3>
 
