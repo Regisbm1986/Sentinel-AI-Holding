@@ -1,4 +1,4 @@
-# Sentinel OS        Website:   https://www.sentinel-os.ia.br
+# Sentinel AI        Website:   https://www.sentinel-os.ia.br
 
 Contato:  contato@sentinel-os.ia.br
 
