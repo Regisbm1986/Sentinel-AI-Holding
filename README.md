@@ -3,7 +3,7 @@
 Contato:contato@sentinel-os.ia.br
 
 <p align="center">
-  <img src="docs/banner.png" alt="Sentinel OS Banner">
+  <img src="docs/ChatGPT Image 31 de jul. de 2026, 17_36_16.png" alt="Sentinel OS Banner">
 </p>
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
