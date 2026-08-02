@@ -95,3 +95,21 @@ watchdog==6.0.0
 websockets==16.0
 xlsxwriter==3.2.9
 zc.lockfile==4.0
+
+# Sentinel Career Health Engine Validation Requirements
+pytest
+pytest-cov
+streamlit
+openai
+matplotlib
+reportlab
+pypdf
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+pytest-cov
+matplotlib
+openai
+reportlab
+pypdf
