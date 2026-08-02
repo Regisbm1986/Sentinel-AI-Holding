@@ -1,308 +1,97 @@
-# Sentinel OS              Website: https://www.sentinel-os.ia.br
-
-Contato:contato@sentinel-os.ia.br
-
-<p align="center">
-  <img src="docs/ChatGPT Image 31 de jul. de 2026, 17_36_16.png" alt="Sentinel OS Banner">
-</p>
-
-![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
-![Azure](https://img.shields.io/badge/Azure-Cloud-blue?style=for-the-badge&logo=microsoftazure)
-![Linux](https://img.shields.io/badge/Linux-Ubuntu-orange?style=for-the-badge&logo=ubuntu)
-![AI](https://img.shields.io/badge/AI-Native-purple?style=for-the-badge)
-![Security](https://img.shields.io/badge/Cyber-Security-red?style=for-the-badge)
-![Cloud Native](https://img.shields.io/badge/Cloud-Native-Architecture-blue?style=for-the-badge&logo=kubernetes)
-![Status](https://img.shields.io/badge/Status-Active_Development-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Observability](https://img.shields.io/badge/Observability-Telemetry-black?style=for-the-badge)
-![Automation](https://img.shields.io/badge/Automation-Orchestration-darkgreen?style=for-the-badge)
-![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red?style=for-the-badge&logo=streamlit)
-![Docker](https://img.shields.io/badge/Docker-Containers-blue?style=for-the-badge&logo=docker)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-blue?style=for-the-badge&logo=kubernetes)
-
-## ❤️ Support Sentinel OS
-
-Sentinel OS is an independent open-source initiative focused on autonomous cybersecurity, observability, compliance, and AI-driven operations.
-
-If you believe in the future of autonomous security platforms, consider supporting the project:
-
-👉 https://github.com/sponsors/Regisbm1986
-
-Your support helps fund:
-
-- Azure AI infrastructure
-- Autonomous agent development
-- Security automation research
-- New integrations and modules
-- Open-source community growth
+# Sentinel AI              Website: https://www.sentinel-os.ia.br
 
 
-## AI-Native Cyber Operations Platform
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Regisbm1986/sentinel-ai/main/products/sentinel-career/frontend/landing/SentinelAI.png" alt="Sentinel AI Logo" width="600">
 
-Sentinel OS is an AI-driven security operations ecosystem focused on:
+  <h3>Intelligent Autonomous Ecosystem & SaaS Holding</h3>
 
-* Offensive Security
-* Compliance
-* Observability
-* Threat Intelligence
-* Automation
-* Cloud-Native Security
-* Autonomous Cyber Operations
+  <p>
+    <b>Sentinel AI</b> is an enterprise-grade SaaS holding that orchestrates AI-driven platforms, autonomous agents, continuous observability, and zero-trust governance.
+  </p>
 
-The project is being architected as a modular and scalable security platform designed to evolve into a next-generation cyber operations environment powered by artificial intelligence, orchestration and distributed analysis.
+  <p>
+    <a href="README.pt-BR.md">🇧🇷 Leia em Português</a>
+  </p>
+</div>
 
 ---
 
-# Vision
+## 🚀 The Ecosystem
 
-Sentinel OS aims to become a unified cyber operations ecosystem capable of:
+Sentinel AI is built on a highly scalable, decoupled monorepo architecture. It provides a shared **Platform Core** that powers multiple independent market-focused products.
 
-* Automated offensive simulation
-* Intelligent vulnerability correlation
-* Infrastructure observability
-* Security orchestration
-* Autonomous workflows
-* AI-assisted security analysis
-* Cloud-native distributed operations
+### 💼 Sentinel Career (MVP Phase)
+An enterprise career intelligence platform. Features a cognitive ATS (Applicant Tracking System), AI-assisted interview simulations, smart onboarding journeys, and automated application workflows driven by real-time telemetry.
 
-The long-term objective is to create an operational security platform capable of serving companies, analysts, researchers and enterprise environments through intelligent automation and modular cyber capabilities.
+### 🏡 Sentinel Home
+A smart residential hub for IoT automation, proactive security, and energy efficiency. Contextual AI agents learn routines, integrate smart devices, and execute commands with enterprise-level governance.
 
----
-
-# Core Principles
-
-## Modular Architecture
-
-Sentinel OS is transitioning from a monolithic structure into a modular ecosystem where each security capability operates independently.
-
-## AI-Native Foundation
-
-Artificial intelligence is not treated as an external plugin, but as a core operational layer integrated into orchestration and decision-making.
-
-## Cloud-First Infrastructure
-
-The platform is designed to operate in cloud-native environments with scalability and distributed execution in mind.
-
-## Operational Security Focus
-
-Sentinel OS prioritizes:
-
-* observability
-* operational visibility
-* security automation
-* tactical execution
-* infrastructure awareness
+### 🛡️ Sentinel OS
+An autonomous cybersecurity and system operations platform. It coordinates defense workflows, intelligent vulnerability correlation, and operational control through a unified executive dashboard.
 
 ---
 
-## Current Architecture
+## 🏗️ Strategic Architecture
 
-Sentinel OS currently includes a functional autonomous orchestration pipeline capable of dispatching tasks, selecting active workers, executing jobs and persisting operational state.
+The ecosystem follows a strict **Platform-Oriented Monorepo** design. The core principle is low coupling and high reusability. Independent products do not communicate with each other; they only rely on the shared core.
 
-### Core Components
+```text
+                           Sentinel AI
+                      (Enterprise Holding)
+                               │
+        ┌──────────────────────┴──────────────────────┐
+        ▼                                             ▼
+ ⚙️ Platform Core                              ☁️ Infrastructure
+ (Auth, AI Agents, RAG,                        (Docker, Nginx, Azure,
+ Vector DB, Telemetry, APIs)                   Pipelines, Scripts)
+        │                                             
+        └──────────────┬──────────────┬───────────────┐
+                       │              │               │
+                       ▼              ▼               ▼
+                 Sentinel Career  Sentinel Home  Sentinel OS
+Why this architecture?
+Scalability: New products can be deployed without altering the existing ecosystem.
 
-* WorkflowStateManager
-* TaskExecutor
-* TaskHistory
-* AgentMemory
-* RemoteWorkerManager
-* WorkerHeartbeat
-* WorkerSelector
-* WorkerDispatcher
-* WorkerExecutor
-* TaskResultManager
-* Orchestrator
+Reusability: Core components (like Auth or Vector Databases) are built once and consumed by all products.
 
-### Current Workflow
+Isolation: An update or failure in Sentinel Home has zero impact on Sentinel Career.
 
-Task
-→ Orchestrator
-→ WorkflowStateManager
-→ WorkerDispatcher
-→ WorkerSelector
-→ WorkerHeartbeat
-→ WorkerExecutor
-→ TaskResultManager
-→ TaskHistory
-→ AgentMemory
+📂 Repository Structure
+Plaintext
+/sentinel-ai
+├── /docs                    # Architecture documentation, playbooks, and roadmaps
+├── /infrastructure          # Deployment configurations (Docker, Nginx)
+├── /platform                # Shared Core Services
+│   ├── /backend             # Shared APIs, AI Agents, Memory, Telemetry
+│   ├── /requirements        # Core dependencies
+│   └── /tests               # Unified test suites
+└── /products                # Independent SaaS Products
+    ├── /sentinel-career     # Career Intelligence logic & frontend
+    ├── /sentinel-home       # Residential automation logic
+    └── /sentinel-os         # Cyber ops logic
+❤️ Support Sentinel AI
+Sentinel AI is an independent initiative focused on the future of autonomous workflows, AI operations, and robust software architecture.
 
-### Current Capabilities
+If you believe in the future of autonomous platforms, consider supporting the project:
+👉 Support Reginaldo on GitHub Sponsors
 
-* Worker registration
-* Worker health monitoring
-* Worker selection
-* Task dispatching
-* Workflow state tracking
-* Result persistence
-* Task history persistence
-* Agent memory persistence
-* End-to-end orchestration pipeline
+Your support directly funds:
 
-### Current Milestone
+Azure AI infrastructure and Cloud scaling
 
-v0.4.0-first-workflow                    ✅
+Autonomous agent research and RAG pipelines
 
-v0.5.0-real-execution                    ✅
+Open-source community growth
 
-v0.5.1-orchestrated-real-execution       ✅
+📬 Contact & Author
+Author: Reginaldo Soares de Vasconcelos Filho 
 
-v0.6.0-task-queue                        ⏳
+Website: www.sentinel-os.ia.br
 
-v0.7.0-developer-worker                  ⏳
+Contact: contato@sentinel-os.ia.br
 
-v0.8.0-codex-integration                 ⏳
+Building the future of intelligent cyber and business operations.
 
-v0.9.0-autonomous-development            ⏳
 
-v1.0.0-sentinel-launch
 
-# Platform Objectives
-
-## Offensive Operations
-
-* Web assessment
-* SMB enumeration
-* Kubernetes analysis
-* Docker security analysis
-* OSINT intelligence gathering
-* Credential analysis
-
-## Observability
-
-* Infrastructure telemetry
-* Security event visibility
-* Execution tracing
-* Distributed monitoring
-
-## Automation
-
-* Workflow orchestration
-* Automated execution pipelines
-* Event-driven processing
-* Autonomous task execution
-
-## Compliance
-
-* Infrastructure inspection
-* Vulnerability visibility
-* Operational reporting
-* Security posture analysis
-
----
-
-# Technology Stack
-
-* Python
-* Streamlit
-* Docker
-* Kubernetes
-* Azure Cloud
-* Linux
-* AI Integration
-* Event-Driven Architecture
-
----
-
-# Current Development Stage
-
-Sentinel OS is currently focused on:
-
-* backend modularization
-* architecture restructuring
-* cloud-native preparation
-* operational stabilization
-* AI orchestration foundation
-
----
-
-# Long-Term Roadmap
-
-## Phase 1 — Structural Foundation
-
-* Modular backend
-* Streamlit separation
-* Execution isolation
-* Virtual environment standardization
-
-## Phase 2 — Core Platform
-
-* Event Bus
-* Telemetry layer
-* Distributed workers
-* Central orchestration
-
-## Phase 3 — AI Layer
-
-* AI-assisted operations
-* Intelligent correlation
-* Autonomous analysis
-* Threat reasoning
-
-## Phase 4 — Cloud Ecosystem
-
-* Multi-user environment
-* Authentication
-* RBAC
-* Organization workspaces
-* SaaS architecture
-
-## Phase 5 — Enterprise Operations
-
-* Distributed execution
-* Cloud scaling
-* Multi-region infrastructure
-* Advanced observability
-* Security automation ecosystem
-
----
-
-# Philosophy
-
-Sentinel OS is not intended to be just another security tool.
-
-The project is being designed as an operational ecosystem focused on intelligent cyber operations, scalable automation and modular security architecture.
-
----
-
-# Project Status
-
-Current Status
-
-- Admin Dashboard
-
-- User Operations Console
-
-- Autonomous Task Orchestration
-
-- Worker Management
-
-- Telemetry
-
-- Capability Registry
-
-- Automatic Module Discovery
-
-- 55 Automated Tests Passing
-
----
-
-# Author
-
-Reginaldo Soares de Vasconcelos Filho
-
----
-
-# Future Goals
-
-* AI Security Operations
-* Autonomous SOC capabilities
-* Cloud-native orchestration
-* Security intelligence correlation
-* Enterprise-scale observability
-* Intelligent cyber automation
-
----
-
-# Sentinel OS
-
-Building the future of intelligent cyber operations.
