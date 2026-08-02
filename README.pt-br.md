@@ -1,7 +1,7 @@
 # Sentinel AI        Website:   https://www.sentinel-os.ia.br
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Regisbm1986/sentinel-ai/main/products/sentinel-career/frontend/landing/SentinelAI.png" alt="Sentinel AI Logo" width="600">
+  <img src="./docs/ChatGPT%20Image%2031%20de%20jul.%20de%202026,%2017_36_16.png" alt="Sentinel AI Logo" width="600">
 
   <h3>Ecossistema Autônomo e Holding SaaS Enterprise</h3>
 
