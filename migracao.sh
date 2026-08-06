@@ -47,15 +47,15 @@ echo "[Fase 1] Removendo duplicidades de dados..."
 
 # 4) Criar diretórios da plataforma
 echo "[Fase 2] Criando estrutura do diretório Platform..."
-mkdir -p platform/backend platform/tests platform/requirements
+mkdir -p sentinel_os/platform/backend sentinel_os/platform/tests sentinel_os/platform/requirements
 
 # 5) Criar diretórios dos produtos
 echo "[Fase 2] Criando estrutura dos produtos..."
-mkdir -p products/sentinel-career/backend
-mkdir -p products/sentinel-career/frontend
-mkdir -p products/sentinel-career/data
-mkdir -p products/sentinel-career/tests
-mkdir -p products/sentinel-os/frontend
+mkdir -p products/sentinel_career/backend
+mkdir -p products/sentinel_career/frontend
+mkdir -p products/sentinel_career/data
+mkdir -p products/sentinel_career/tests
+mkdir -p products/sentinel_os/frontend
 
 
 # 6) Recriar infraestrutura alvo
@@ -64,7 +64,7 @@ mkdir -p infrastructure/docker infrastructure/nginx infrastructure/scripts
 
 # 7) Preparar diretórios de documentação
 echo "[Fase 2] Preparando diretórios de documentação..."
-mkdir -p docs/platform docs/products/sentinel-career
+mkdir -p docs/platform docs/products/sentinel_career
 
 #########################################
 # Fase 3: Movimentação (De -> Para)     #
@@ -74,14 +74,14 @@ mkdir -p docs/platform docs/products/sentinel-career
 echo "[Fase 3] Migrando componentes de plataforma..."
 if [[ -d backend ]]; then
   for item in backend/*; do
-    mv "$item" platform/backend/
+    mv "$item" sentinel_os/platform/backend/
   done
 fi
 
 # 9) Migrar suíte de testes para a nova base
 if [[ -d tests ]]; then
   for item in tests/*; do
-    mv "$item" platform/tests/
+    mv "$item" sentinel_os/platform/tests/
   done
 fi
 
@@ -93,10 +93,10 @@ for doc_file in CHANGELOG.md RELEASES.md; do
 done
 # 11) Reagrupar configurações de testes da plataforma
 if [[ -f conftest.py ]]; then
-  mv conftest.py platform/tests/
+  mv conftest.py sentinel_os/platform/tests/
 fi
 if [[ -f pytest.ini ]]; then
-  mv pytest.ini platform/tests/
+  mv pytest.ini sentinel_os/platform/tests/
 fi
 if [[ -f dryrun_files.txt ]]; then
   mv dryrun_files.txt docs/platform/
@@ -108,26 +108,26 @@ fi
 # 12) Migrar frontend do Sentinel OS
 echo "[Fase 3] Migrando Sentinel OS..."
 if [[ -d frontend/streamlit ]]; then
-  mkdir -p products/sentinel-os/frontend
-  mv frontend/streamlit products/sentinel-os/frontend/
+  mkdir -p products/sentinel_os/frontend
+  mv frontend/streamlit products/sentinel_os/frontend/
 fi
 
 # 13) Migrar backend do Sentinel Career (intelligence)
 echo "[Fase 3] Migrando Sentinel Career (backends)..."
 if [[ -d sentinel-career-intelligence/backend ]]; then
   for item in sentinel-career-intelligence/backend/*; do
-    mv "$item" products/sentinel-career/backend/
+    mv "$item" products/sentinel_career/backend/
   done
 fi
 # 14) Migrar backend legado do Sentinel Career deduplicando arquivos vazios
 if [[ -d products/sentinel_career/backend ]]; then
   for item in products/sentinel_career/backend/*; do
     base_name="$(basename "$item")"
-    dest_path="products/sentinel-career/backend/$base_name"
+    dest_path="products/sentinel_career/backend/$base_name"
     if [[ -f "$item" && -f "$dest_path" && ! -s "$item" && ! -s "$dest_path" ]]; then
       rm -rf "$item"
     else
-      mv "$item" products/sentinel-career/backend/
+      mv "$item" products/sentinel_career/backend/
     fi
   done
 fi
@@ -136,25 +136,25 @@ fi
 echo "[Fase 3] Migrando Sentinel Career (frontend, dados, docs)..."
 if [[ -d sentinel-career-intelligence/frontend ]]; then
   for item in sentinel-career-intelligence/frontend/*; do
-    mv "$item" products/sentinel-career/frontend/
+    mv "$item" products/sentinel_career/frontend/
   done
 fi
 # 16) Reposicionar arquivos de dados do Sentinel Career
 for data_file in sentinel-career-intelligence/payments.json sentinel-career-intelligence/subscriptions.json; do
   if [[ -f "$data_file" ]]; then
-    mv "$data_file" products/sentinel-career/data/
+    mv "$data_file" products/sentinel_career/data/
   fi
 done
 # 17) Migrar documentação específica do Sentinel Career
 if [[ -d sentinel-career-intelligence/docs ]]; then
   for item in sentinel-career-intelligence/docs/*; do
-    mv "$item" docs/products/sentinel-career/
+    mv "$item" docs/products/sentinel_career/
   done
 fi
 
 # 18) Reposicionar testes específicos do Sentinel Career
 for product_test in sentinel-career-intelligence/test_*.py; do
-  mv "$product_test" products/sentinel-career/tests/
+  mv "$product_test" products/sentinel_career/tests/
 done
 
 ########################################
