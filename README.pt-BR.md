@@ -84,4 +84,8 @@ Encontrou uma falha no Sentinel? Veja [SECURITY.md](SECURITY.md).
 
 **Reginaldo Soares de Vasconcelos Filho**, Analista de Segurança da Informação.
 
-Contato: contato@sentinel-os.ia.br
+Contato comercial e dúvidas: formulário em https://sentinel-defesa.floot.app/#contato
+
+## Licença
+
+Todos os direitos reservados. © 2026 Reginaldo Soares de Vasconcelos Filho. Veja o arquivo [LICENSE](LICENSE).
