@@ -1,190 +1,67 @@
-# Sentinel OS Architecture
+# Arquitetura do Sentinel
 
-## Overview
+Visão de alto nível do produto em produção. O código-fonte fica na plataforma de hospedagem (Floot) e não é público; este documento descreve como as peças se encaixam.
 
-Sentinel OS is being designed as an AI-native cyber operations ecosystem focused on modularity, observability, automation and intelligent orchestration.
+## Visão geral
 
-The architecture is evolving from a monolithic Streamlit application into a distributed modular platform capable of supporting:
-
-* offensive security operations
-* observability
-* compliance workflows
-* AI-assisted analysis
-* autonomous orchestration
-* cloud-native execution
-
----
-
-# High-Level Architecture
-
-```text id="s9j3kt"
-Users
-   │
-   ▼
-Frontend Layer
-(Streamlit / Web UI)
-   │
-   ▼
-Core Platform
-(Event Bus / Orchestration / AI Layer)
-   │
-   ├── Offensive Modules
-   ├── Observability Modules
-   ├── Compliance Modules
-   ├── Intelligence Modules
-   │
-   ▼
-Execution Layer
-(Workers / Containers / Agents)
-   │
-   ▼
-Cloud Infrastructure
-(Azure / Kubernetes / Linux)
+```text
+                 Responsável / membro do Blue Team / proprietário
+                                     │
+                                     ▼
+                   Interface web (React 19 + TypeScript)
+   site público · painel da empresa · área do proprietário · páginas por link
+                                     │
+                           /_api/*  (JSON)
+                                     ▼
+                  Endpoints serverless (TypeScript + Zod)
+   ┌────────────┬─────────────┬──────────────┬──────────────┬───────────┐
+   │ Avaliação  │  Achados e  │   Equipe e   │  Relatórios  │ Cobrança  │
+   │   OSINT    │  delegação  │   convites   │  (SHA-256)   │ (Stripe)  │
+   └─────┬──────┴──────┬──────┴──────┬───────┴──────┬───────┴─────┬─────┘
+         │             │             │              │             │
+         ▼             └─────────────┴──────┬───────┘             ▼
+  Fontes públicas                           ▼                  Stripe
+  DNS-over-HTTPS · logs de           PostgreSQL (Kysely)    Checkout · Portal
+  certificados · site da             empresas, ativos,      Webhook assinado
+  própria empresa · HIBP ·           achados, comentários,
+  GitHub                             equipe, relatórios
 ```
 
----
+## Papéis e acesso
 
-# Architectural Principles
+| Papel | Como entra | O que enxerga |
+|---|---|---|
+| **Proprietário** da plataforma | Conta com papel `admin` (nenhum cadastro público cria esse papel) | Funil de vendas, propostas, roteiro de demonstração, lista de empresas e modo de demonstração |
+| **Responsável da empresa** | Cadastro com e-mail e senha | O painel da própria empresa: ativos, achados, avaliação, equipe, relatórios e plano |
+| **Membro do Blue Team** | Link de convite de uso único (7 dias) e depois link pessoal permanente | Somente os achados atribuídos a ele |
 
-## Modular Design
+Os links guardam apenas o hash SHA-256 no banco. Revogar o membro ou gerar um novo link invalida o anterior na hora. Senhas de usuários são guardadas com hash.
 
-Each security capability operates independently as an isolated module.
+## Fluxos principais
 
-## Event-Driven Core
+**Avaliação.** O responsável confirma que é dono do domínio e dispara a avaliação. O motor consulta as fontes públicas, compara com os achados existentes e, para cada verificação:
 
-Future orchestration will rely on events, telemetry and distributed workflows.
+- problema novo: abre o achado;
+- problema que voltou: reabre;
+- verificação concluída sem problema: fecha o achado sozinha, com comentário do sistema;
+- fonte indisponível: a verificação fica "não executada" e **nunca fecha achados por engano**.
 
-## AI-Native Operations
+**Delegação.** Achado atribuído a um membro ativo (termo aceito) com prazo. O membro comenta, inicia a correção e só marca como corrigido com evidência escrita.
 
-Artificial intelligence will function as a central operational layer.
+**Relatório.** O conteúdo é montado em formato canônico, recebe a seção de escopo e limites, e o hash SHA-256 é calculado sobre o resultado final.
 
-## Cloud-First Infrastructure
+**Cobrança.** Checkout de assinatura do Stripe, em reais, na conta do proprietário. O plano só muda depois que o Stripe confirma pelo webhook, que é verificado por assinatura HMAC e processado uma única vez por evento.
 
-The platform is designed to scale within cloud-native environments.
+## Decisões de projeto
 
-## Security Visibility
+- **Passivo por construção.** O motor só faz consultas DNS públicas, leitura de logs públicos e requisições GET simples ao site da própria empresa. Hosts fora do domínio ou que resolvam para IP privado são recusados (proteção contra SSRF).
+- **Provar antes de fechar.** Corrigir exige evidência, e a reavaliação confirma.
+- **Escopo explícito.** Todo relatório informa o que foi e o que não foi coberto.
+- **Sem dependência de custo por cliente.** As fontes usadas têm uso gratuito para este fim.
 
-Observability and telemetry are treated as core operational requirements.
+## Limites conhecidos
 
----
+- O monitoramento semanal automático está implementado, mas só roda com um plano de hospedagem que permita tarefas agendadas.
+- Alertas e convites por e-mail dependem de um domínio de envio verificado.
 
-# Current Structure
-
-```text id="6fxn4v"
-frontend/
-backend/
-core/
-infrastructure/
-docs/
-```
-
----
-
-# Frontend Layer
-
-Responsible for:
-
-* user interaction
-* dashboards
-* execution requests
-* result visualization
-
-Current technology:
-
-* Streamlit
-
-Future possibilities:
-
-* React
-* Next.js
-* Enterprise dashboards
-
----
-
-# Backend Modules
-
-Each module is isolated:
-
-```text id="6jplrk"
-backend/modules/<module>/
-```
-
-Example:
-
-```text id="08uljc"
-backend/modules/nikto/
-```
-
-Modules are responsible for:
-
-* execution
-* parsing
-* event generation
-* telemetry
-
----
-
-# Core Layer
-
-The future core platform will contain:
-
-## Event Bus
-
-Central communication layer.
-
-## Orchestration
-
-Workflow execution engine.
-
-## Telemetry
-
-Operational visibility and tracing.
-
-## AI Layer
-
-Intelligent correlation and operational reasoning.
-
----
-
-# Cloud Infrastructure
-
-Target cloud ecosystem:
-
-* Microsoft Azure
-
-Future infrastructure:
-
-* Kubernetes
-* Distributed Workers
-* Multi-region deployment
-* Containerized execution
-* AI inference services
-
----
-
-# Future Expansion
-
-## SaaS Architecture
-
-* multi-user
-* organizations
-* RBAC
-* authentication
-
-## Autonomous Security Operations
-
-* AI-driven workflows
-* automated correlation
-* threat reasoning
-
-## Distributed Execution
-
-* scalable workers
-* remote agents
-* orchestration pipelines
-
----
-
-# Sentinel OS
-
-Architecture focused on the future of intelligent cyber operations.
+Veja o [roteiro](roadmap.md).
