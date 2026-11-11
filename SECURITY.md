@@ -4,13 +4,13 @@ O Sentinel é uma plataforma de segurança e leva a sério qualquer relato de fa
 
 ## Como reportar
 
-Envie um e-mail para **contato@sentinel-os.ia.br** com o assunto "Falha de segurança". Inclua:
+Use o formulário de contato em https://sentinel-defesa.floot.app/#contato e comece a mensagem com "Falha de segurança". Inclua:
 
 - o que você encontrou e onde (URL ou funcionalidade);
 - como reproduzir, em passos curtos;
 - o impacto que você enxerga.
 
-Responderemos assim que possível e manteremos você informado até a correção.
+Não publique detalhes da falha em issues públicas do GitHub nem em redes sociais antes da correção, e não envie dados sensíveis de terceiros na mensagem. Responderemos assim que possível e manteremos você informado até a correção.
 
 ## Regras para a pesquisa
 

@@ -84,4 +84,8 @@ Found a vulnerability in Sentinel? See [SECURITY.md](SECURITY.md).
 
 **Reginaldo Soares de Vasconcelos Filho**, Information Security Analyst.
 
-Contact: contato@sentinel-os.ia.br
+Sales and questions: contact form at https://sentinel-defesa.floot.app/#contato
+
+## License
+
+All rights reserved. © 2026 Reginaldo Soares de Vasconcelos Filho. See the [LICENSE](LICENSE) file.
