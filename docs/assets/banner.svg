@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="420" viewBox="0 0 1440 420" role="img" aria-labelledby="t d">
+  <title id="t">Sentinel: defesa para Blue Teams</title>
+  <desc id="d">Escudo verde-petróleo ao lado do nome Sentinel e do lema: veja o que o mundo enxerga da sua empresa e corrija.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1F1E"/>
+      <stop offset="1" stop-color="#0B3B37"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1FA89C"/>
+      <stop offset="1" stop-color="#0B6E66"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="420" fill="url(#bg)"/>
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 105H1440M0 210H1440M0 315H1440"/>
+    <path d="M360 0V420M720 0V420M1080 0V420"/>
+  </g>
+  <g transform="translate(150 70)">
+    <path d="M140 0 L270 48 V150 C270 232 216 282 140 310 C64 282 10 232 10 150 V48 Z" fill="url(#shield)" stroke="#7FE0D6" stroke-width="4"/>
+    <path d="M140 60 L218 88 V150 C218 198 186 228 140 246 C94 228 62 198 62 150 V88 Z" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3"/>
+    <path d="M96 150 L128 182 L190 116" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g font-family="'IBM Plex Sans','Segoe UI',Arial,sans-serif" fill="#ffffff">
+    <text x="500" y="195" font-size="104" font-weight="700" letter-spacing="2">Sentinel</text>
+    <text x="504" y="250" font-size="34" fill="#7FE0D6" letter-spacing="1">Defesa para Blue Teams</text>
+    <text x="504" y="312" font-size="26" fill="#ffffff" fill-opacity="0.8">Veja o que o mundo enxerga da sua empresa. Corrija. Prove.</text>
+    <text x="504" y="356" font-size="22" fill="#ffffff" fill-opacity="0.55">OSINT passivo · LGPD · ISO 27001 · NIST CSF</text>
+  </g>
+</svg>
